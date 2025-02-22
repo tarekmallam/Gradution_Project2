@@ -1,0 +1,215 @@
+{% extends "base.html" %} {% block title %}Detect{%endblock%}
+{%block content%}
+		<!-- Hero Section -->
+		<section
+			id="hero-section"
+			class="carousel slide"
+			data-bs-ride="carousel"
+		>
+			<div class="carousel-inner">
+				<!--Slide 1-->
+				<div
+					class="carousel-item active"
+					style="
+						background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
+							no-repeat center center;
+						background-size: 80%;
+						height: 100vh;
+					"
+				>
+					<div
+						class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+					>
+						<h1
+							class="text-white"
+							style="font-size: 6rem; font-weight: 900"
+						>
+							Detect Skin Cancer Early
+						</h1>
+					</div>
+				</div>
+				<!-- Slide 2 -->
+				<div
+					class="carousel-item"
+					style="
+						background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
+							no-repeat center center;
+						background-size: cover;
+						height: 100vh;
+					"
+				>
+					<div
+						class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+					>
+						<h1
+							class="text-white"
+							style="font-size: 4rem"
+						>
+							Accurate AI-powered Detection
+						</h1>
+					</div>
+				</div>
+				<!-- Slide 3 -->
+				<div
+					class="carousel-item"
+					style="
+						background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
+							no-repeat center center;
+						background-size: cover;
+						height: 100vh;
+					"
+				>
+					<div
+						class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+					>
+						<h1
+							class="text-white"
+							style="font-size: 4rem"
+						></h1>
+					</div>
+				</div>
+			</div>
+			<!-- Controls -->
+			<button
+				class="carousel-control-prev"
+				type="button"
+				data-bs-target="#hero-section"
+				data-bs-slide="prev"
+			>
+				<span
+					class="carousel-control-prev-icon"
+					aria-hidden="true"
+				></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button
+				class="carousel-control-next"
+				type="button"
+				data-bs-target="#hero-section"
+				data-bs-slide="next"
+			>
+				<span
+					class="carousel-control-next-icon"
+					aria-hidden="true"
+				></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</section>
+
+		<!-- Detect Section -->
+		<section class="detect-section">
+			<div class="container">
+				<h2>Upload an Image</h2>
+				<div class="upload-card p-4 border rounded shadow text-center">
+					<i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+					<p class="mb-3">Choose an image to analyze.</p>
+					<!-- Warning message -->
+					<span
+						id="warningMessage"
+						style="
+							color: red;
+							display: none;
+							font-size: 1.5rem;
+							font-weight: bolder;
+						"
+					>
+						Please select an image before analyzing!
+					</span>
+					<form
+						action="/predict"
+						id="uploadForm"
+						method="POST"
+						enctype="multipart/form-data"
+					>
+						<input
+							id="imageInput"
+							type="file"
+							name="image"
+							accept="image/*"
+							class="form-control mb-3"
+							required
+						/>
+						<!-- Analyze button -->
+						<button
+							id="btn1"
+							type="button"
+							class="btn btn-primary"
+						>
+							Analyze
+						</button>
+					</form>
+				</div>
+
+				<!-- Result Section -->
+				<div
+					class="result-section"
+					id="result"
+				>
+					<h3>Results will be displayed here.</h3>
+				</div>
+			</div>
+		</section>
+		<!-- Chatbot Button -->
+		<div
+			id="chatbot-btn"
+			class="chatbot-btn"
+		>
+			<i class="fas fa-comment"></i>
+		</div>
+
+		<!-- Chatbot Modal -->
+		<div
+			id="chatbot-modal"
+			class="chatbot-modal"
+		>
+			<div class="chatbot-header">
+				<h4>Chat with us</h4>
+				<button
+					id="close-chat"
+					class="close-btn"
+				>
+					&times;
+				</button>
+			</div>
+			<div class="chatbot-body">
+				<p>Hi! How can I help you today?</p>
+			</div>
+		</div>
+
+		<!-- Bootstrap JS & Popper.js -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+		<script>
+			// Get the chatbot button and modal
+			const chatbotBtn = document.getElementById('chatbot-btn')
+			const chatbotModal = document.getElementById('chatbot-modal')
+			const closeBtn = document.getElementById('close-chat')
+
+			// Show the chatbot modal when button is clicked
+			chatbotBtn.addEventListener('click', function () {
+				chatbotModal.style.display = 'block'
+			})
+
+			// Close the chatbot modal when the close button is clicked
+			closeBtn.addEventListener('click', function () {
+				chatbotModal.style.display = 'none'
+			})
+
+			// check if there isn't input for image
+
+			const imageInput = document.getElementById('imageInput') //input
+			const warningMessage = document.getElementById('warningMessage') //message
+			const analyzeButton = document.getElementById('btn1') // conditon
+
+			analyzeButton.addEventListener('click', function () {
+				if (!imageInput.value) {
+					warningMessage.style.display = 'block'
+				} else {
+					warningMessage.style.display = 'none'
+					window.location.href = 'login.html'
+				}
+			})
+		</script>
+	
+
+{%endblock%}

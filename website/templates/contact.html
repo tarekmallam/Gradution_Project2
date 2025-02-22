@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}Contact{%endblock%}
+{%block content%}
+
+	<section
+		id="hero-section"
+		class="carousel slide"
+		data-bs-ride="carousel"
+	>
+		<div class="carousel-inner">
+			<!-- Slide 1 -->
+			<div
+				class="carousel-item active"
+				style="
+					background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 6rem; font-weight: 900"
+					>
+						Detect Skin Cancer Early
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 2 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 6rem; font-weight: 900; text-shadow: 2px 2px"
+					>
+						Accurate AI-powered Detection
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 3 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 4rem"
+					></h1>
+				</div>
+			</div>
+		</div>
+		<!-- Controls -->
+		<button
+			class="carousel-control-prev"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="prev"
+		>
+			<span
+				class="carousel-control-prev-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button
+			class="carousel-control-next"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="next"
+		>
+			<span
+				class="carousel-control-next-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</section>
+	<!-- Contact Section -->
+	<section class="contact-section">
+		<div class="container">
+			<div class="row">
+				<!-- Contact Details -->
+				<div class="col-md-6 contact-details">
+					<h3>Get in Touch</h3>
+					<p>
+						<i class="fas fa-map-marker-alt"></i> 123 Main Street, Cairo,
+						Egypt
+					</p>
+					<p><i class="fas fa-phone-alt"></i> +20 123 456 789</p>
+					<p><i class="fas fa-envelope"></i> info@skincancerdetection.com</p>
+					<p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 5:00 PM</p>
+				</div>
+				<!-- Map -->
+				<div class="col-md-6 map-container">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.7995103588876!2d31.224226315445845!3d30.044419081881522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840c764476baf%3A0x4b57f12c41f89b19!2sCairo%2C%20Egypt!5e0!3m2!1sen!2s!4v1636530338654!5m2!1sen!2s"
+						allowfullscreen=""
+						loading="lazy"
+					>
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endblock %}

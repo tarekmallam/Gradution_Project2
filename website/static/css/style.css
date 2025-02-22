@@ -1,0 +1,581 @@
+/* Custom Styles */
+body {
+	font-family: 'Cursive';
+	margin: 0;
+	padding: 0;
+	background-color: #f4f6f8;
+}
+
+/* Navbar Styles */
+.navbar {
+	background-color: #1abc9c;
+}
+/* skin cancer deductions  */
+.navbar .navbar-brand {
+	display: block;
+	font-size: 3rem;
+	margin-left: -250px;
+	padding-right: 900px;
+	font-weight: bolder;
+	color: white;
+}
+
+.nav-link {
+	padding-left: 200px;
+	color: white;
+	font-size: 1.5rem;
+	transition: color 0.3s;
+	margin-right: 20px;
+
+	.button-container {
+		display: flex;
+		margin-right: 20px;
+		justify-content: flex-end;
+	}
+}
+
+.nav-link:hover {
+	color: #34495e;
+}
+
+/* Hero Section */
+.hero-section {
+	position: relative;
+	height: 50vh;
+	background: url('https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg')
+		no-repeat center center;
+	background-size: 60%;
+	color: #1abc9c;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 10px 10px;
+	margin-left: 10px;
+}
+
+.hero-overlay {
+	background: #1abc9c;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin-left: 10px;
+}
+
+.hero-content h1 {
+	font-size: 3rem;
+	margin-bottom: 20px;
+	margin-left: 10px;
+}
+
+.hero-content p {
+	font-size: 1.5rem;
+	margin-bottom: 40px;
+}
+
+/* Button Styles */
+.btn-primary {
+	background-color: #1abc9c;
+	border: 30%;
+	padding: 12px 12px;
+	font-size: 1.2rem;
+	border-radius: 30px;
+	margin-left: 10px;
+}
+
+primary:hover {
+	background-color: #1abc9c;
+}
+
+/* Services Section */
+.services-box {
+	display: flex;
+	justify-content: space-around;
+	padding: 60px 0;
+}
+
+.service-item {
+	text-align: center;
+	background-color: #1abc9c;
+	border-radius: 10px;
+	/* padding: 30px; */
+	width: 30%;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease-in-out;
+}
+
+.service-item:hover {
+	transform: translateY(-10px);
+}
+
+.service-item i {
+	font-size: 3rem;
+	color: #1abc9c;
+}
+
+.service-item h3 {
+	margin-top: 20px;
+	font-size: 1.5rem;
+}
+
+.service-item p {
+	font-size: 1rem;
+	color: #f3f9fa;
+}
+
+/* How to Use Section */
+.how-to-use-section {
+	background-color: #1abc9c;
+	padding: 60px 0;
+}
+
+.how-to-use-section h2 {
+	font-size: 2rem;
+	margin-bottom: 40px;
+	color: #1abc9c;
+	font-weight: bold;
+	text-align: center;
+}
+
+.how-to-use-icons {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+}
+
+.how-to-use-icon-box {
+	background-color: white;
+	text-align: center;
+	padding: 40px;
+	width: 250px;
+	border-radius: 10px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease-in-out;
+}
+
+.how-to-use-icon-box:hover {
+	transform: translateY(-10px);
+}
+
+.how-to-use-icon-box i {
+	font-size: 3rem;
+	color: #1abc9c;
+	margin-bottom: 20px;
+}
+
+.how-to-use-icon-box h4 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+.how-to-use-icon-box p {
+	font-size: 1rem;
+	color: #7f8c8d;
+}
+
+/* Contact Section */
+.contact-section {
+	padding: 60px 0;
+}
+
+.contact-details h3 {
+	color: #1abc9c;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.contact-details p {
+	font-size: 1.1rem;
+	color: #7f8c8d;
+}
+
+.contact-details i {
+	color: #1abc9c;
+	margin-right: 10px;
+}
+
+.map-container iframe {
+	width: 100%;
+	height: 350px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* About Section */
+.about-section {
+	padding: 60px 20px;
+}
+
+.about-section h2 {
+	color: #1abc9c;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.about-section p {
+	font-size: 1.1rem;
+	color: #7f8c8d;
+	text-align: justify;
+	margin-bottom: 20px;
+}
+
+/* Team Section */
+.team-section {
+	background-color: #1abc9c;
+	color: #07f8c8;
+	padding: 60px 20px;
+}
+
+.team-section h2 {
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.team-card {
+	background-color: white;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	padding: 20px;
+	transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+	transform: scale(1.05);
+}
+
+.team-card img {
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	margin-bottom: 15px;
+}
+
+/* Footer Section */
+.footer {
+	background-color: #34495e;
+	color: white;
+	padding: 30px 0;
+	text-align: center;
+}
+
+.footer a {
+	color: #1abc9c;
+	text-decoration: none;
+	margin: 0 10px;
+}
+
+.footer a:hover {
+	color: #16a085;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.services-box {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.service-item {
+		width: 80%;
+		margin-bottom: 30px;
+	}
+
+	.how-to-use-icons {
+		flex-direction: column;
+	}
+
+	.how-to-use-icon-box {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.contact-details {
+		margin-bottom: 30px;
+	}
+}
+
+/* Blog Cards */
+.blog-card {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: transform 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+	transform: translateY(-10px);
+}
+
+.blog-card img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+
+.blog-card-body {
+	padding: 20px;
+}
+
+.blog-card-body h5 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+/* Modern Modal Styles */
+.modal-dialog {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.modal-content {
+	border-radius: 15px;
+	background-color: #ffffff;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+	border: none;
+	transition: transform 0.3s ease-in-out;
+}
+
+.modal-header {
+	background-color: #1abc9c;
+	color: white;
+	border-radius: 15px 15px 0 0;
+	padding: 15px;
+}
+
+.modal-title {
+	font-size: 1.8rem;
+}
+
+.modal-body {
+	padding: 20px;
+}
+
+.modal-footer {
+	border-top: none;
+	padding: 10px;
+	text-align: center;
+}
+
+.modal-close-btn {
+	background-color: #1abc9c;
+	color: white;
+	font-size: 1.1rem;
+	border: none;
+	border-radius: 5px;
+	padding: 8px 15px;
+	cursor: pointer;
+}
+
+.modal-close-btn:hover {
+	background-color: #16a085;
+}
+
+.detect-section {
+	padding: 60px 20px;
+}
+
+.detect-section h2 {
+	color: hsl(168, 76%, 42%);
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.upload-card {
+	background-color: white;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	text-align: center;
+	transition: transform 0.3s ease;
+}
+
+.upload-card:hover {
+	transform: translateY(-5px);
+}
+
+.upload-card i {
+	font-size: 3rem;
+	color: #1abc9c;
+	margin-bottom: 20px;
+}
+
+.upload-card .btn-primary {
+	background-color: #1abc9c;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-size: 1rem;
+	transition: background-color 0.3s;
+}
+
+.upload-card .btn-primary:hover {
+	background-color: #16a085;
+}
+
+.result-section {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.result-section h3 {
+	color: #34495e;
+	font-weight: bold;
+}
+/* Carousel item */
+#hero-section .carousel-item {
+	max-height: 625px;
+}
+
+/* change color gradient  */
+.text-white {
+	color: red; /* Fallback color for older browsers */
+	background: linear-gradient(to left, #8360c3, #2ebf91);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+/* General styles */
+
+/* Center the card */
+.card {
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	background: #fff;
+}
+
+/* Card titles */
+h3 {
+	font-weight: bold;
+	color: #4a4a4a;
+}
+
+/* Input fields */
+.form-control {
+	border: none;
+	border-radius: 10px;
+	background-color: #f7f7f7;
+	padding: 12px;
+	box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+	background-color: #fff;
+	border: 2px solid #6e8efb;
+	box-shadow: none;
+	outline: none;
+}
+
+/* Buttons */
+.btn-primary {
+	background: linear-gradient(90deg, #1abc9c, #1abc9c);
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-weight: 600;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+	background: linear-gradient(90deg, #1abc9c, #1abc9c);
+	box-shadow: 0 5px 15px rgba(110, 142, 251, 0.5);
+	transform: scale(1.02);
+}
+
+/* Links */
+a {
+	color: #1abc9c;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: #1abc9c;
+	text-decoration: underline;
+}
+.si {
+	background-color: #1abc9c;
+}
+/* Chatbot Button */
+.chatbot-btn {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #007bff; /* Blue color */
+	color: white;
+	border: none;
+	border-radius: 50%;
+	font-size: 30px;
+	padding: 20px;
+	cursor: pointer;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+}
+
+.chatbot-btn:hover {
+	background-color: #0056b3;
+}
+
+/* Chatbot Modal */
+.chatbot-modal {
+	display: none;
+	position: fixed;
+	bottom: 80px; /* Higher to not cover the button */
+	right: 20px;
+	width: 350px;
+	height: 400px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	padding: 20px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+}
+
+/* Chatbot Header */
+.chatbot-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chatbot-header h4 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 24px;
+	color: #888;
+	cursor: pointer;
+}
+
+.close-btn:hover {
+	color: #333;
+}
+
+/* Chatbot Body */
+.chatbot-body {
+	margin-top: 20px;
+	font-size: 16px;
+	color: #333;
+}
+
+/* Chatbot Messages */
+.chatbot-body p {
+	margin: 10px 0;
+}

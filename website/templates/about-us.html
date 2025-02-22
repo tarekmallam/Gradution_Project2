@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+	<section
+		id="hero-section"
+		class="carousel slide"
+		data-bs-ride="carousel"
+	>
+		<div class="carousel-inner">
+			<!-- Slide 1 -->
+			<div
+				class="carousel-item active"
+				style="
+					background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 6rem; font-weight: 900"
+					>
+						Detect Skin Cancer Early
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 2 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 4rem"
+					>
+						Accurate AI-powered Detection
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 3 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 4rem"
+					></h1>
+				</div>
+			</div>
+		</div>
+		<!-- Controls -->
+		<button
+			class="carousel-control-prev"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="prev"
+		>
+			<span
+				class="carousel-control-prev-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button
+			class="carousel-control-next"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="next"
+		>
+			<span
+				class="carousel-control-next-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</section>
+	<!-- About Section -->
+	<section class="about-section">
+		<div class="container">
+			<h2>Who We Are</h2>
+			<p>
+				At Skin Cancer Detection, we are committed to leveraging cutting-edge
+				technology to revolutionize the way skin cancer is diagnosed. Our
+				mission is to provide an accessible, accurate, and efficient platform
+				that empowers individuals and medical professionals in early detection
+				and prevention.
+			</p>
+			<p>
+				Our platform combines advanced AI algorithms with user-friendly design
+				to deliver accurate results. We believe in the power of technology to
+				save lives and are dedicated to making this a reality for everyone.
+			</p>
+		</div>
+	</section>
+	<!-- Team Section -->
+	<section class="team-section">
+		<div class="container">
+			<h2>Meet the Team</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="team-card">
+						<img
+							src="https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg"
+							alt="Team Member"
+						/>
+						<h4>Dr. Sarah Johnson</h4>
+						<p>Chief Medical Officer</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="team-card">
+						<img
+							src="https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg"
+							alt="Team Member"
+						/>
+						<h4>John Smith</h4>
+						<p>Lead Developer</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="team-card">
+						<img
+							src="https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg"
+							alt="Team Member"
+						/>
+						<h4>Emily Davis</h4>
+						<p>AI Specialist</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

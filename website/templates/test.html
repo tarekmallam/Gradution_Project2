@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title %}Model{%endblock%}
+{%block content%}
+    <section>
+        <div class="container">
+            <header>
+                <h1>Skin Cancer Classification</h1>
+                <p>Upload a skin lesion image for analysis</p>
+            </header>
+
+            <main>
+                <div class="upload-section">
+                    <div class="upload-box" id="dropZone">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="upload-content">
+                            <img src="{{ url_for('static', filename='upload-icon.svg') }}" alt="Upload" id="uploadIcon">
+                            <p>Drag and drop or click to upload</p>
+                            <button class="upload-btn">Choose File</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section" style="display: none;">
+                    <div class="image-preview">
+                        <img id="previewImage" src="" alt="Preview">
+                    </div>
+                    <div class="results" style="display: none;">
+                        <h2>Analysis Results</h2>
+                        <div class="result-content">
+                            <p>Classification: <span id="classification"></span></p>
+                            <p>Confidence: <span id="confidence"></span>%</p>
+                        </div>
+                    </div>
+                    <button class="analyze-btn">Analyze Image</button>
+                </div>
+
+                <div class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing image...</p>
+                </div>
+            </main>
+        </div>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </section>
+{% endblock %}

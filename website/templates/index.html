@@ -1,0 +1,212 @@
+{% extends "base.html" %} {% block title %}Home{%endblock%}
+{%block content%}
+	<section
+		id="hero-section"
+		class="carousel slide"
+		data-bs-ride="carousel"
+	>
+		<div class="carousel-inner">
+			<!-- Slide 1 -->
+			<div
+				class="carousel-item active"
+				style="
+					background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
+						no-repeat;
+					background-size: cover;
+					height: 100vh;
+					transition: background 0.5s ease;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center ;"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 6rem; font-weight: 900"
+					>
+						Detect Skin Cancer Early
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 2 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 4rem"
+					>
+						Accurate AI-powered Detection
+					</h1>
+				</div>
+			</div>
+			<!-- Slide 3 -->
+			<div
+				class="carousel-item"
+				style="
+					background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
+						no-repeat center center;
+					background-size: cover;
+					height: 100vh;
+				"
+			>
+				<div
+					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				>
+					<h1
+						class="text-white"
+						style="font-size: 4rem"
+					></h1>
+				</div>
+			</div>
+		</div>
+		<!-- Controls -->
+		<button
+			class="carousel-control-prev"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="prev"
+		>
+			<span
+				class="carousel-control-prev-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button
+			class="carousel-control-next"
+			type="button"
+			data-bs-target="#hero-section"
+			data-bs-slide="next"
+		>
+			<span
+				class="carousel-control-next-icon"
+				aria-hidden="true"
+			></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</section>
+	<!-- title -->
+	<div class="container">
+		<h2 class="text-center my-5">How it Works</h2>
+	</div>
+	<!-- Services Section -->
+	<section class="services-box">
+		<!-- title -->
+		<!-- services -->
+		<div class="service-item">
+			<i class="fas fa-upload"></i>
+			<h3>Upload Image</h3>
+			<p>Upload a high-quality image of your skin area for analysis.</p>
+		</div>
+		<div class="service-item">
+			<i class="fas fa-search"></i>
+			<h3>Analyze</h3>
+			<p>Our AI system will analyze the image for signs of skin cancer.</p>
+		</div>
+		<div class="service-item">
+			<i class="fas fa-check-circle"></i>
+			<h3>Get Results</h3>
+			<p>Receive an instant result on the likelihood of skin cancer.</p>
+		</div>
+	</section>
+	<!-- How to Use Section -->
+	<section class="how-to-use-section">
+		<div class="container">
+			<h2>How to Use</h2>
+			<div class="how-to-use-icons">
+				<div class="how-to-use-icon-box">
+					<i class="fas fa-cloud-upload-alt"></i>
+					<h4>Upload Image</h4>
+					<p>
+						Click "Detect" and upload a clear image of the skin area you're
+						concerned about.
+					</p>
+				</div>
+				<div class="how-to-use-icon-box">
+					<i class="fas fa-cogs"></i>
+					<h4>Analyze</h4>
+					<p>
+						Our system processes the image to check for any signs of skin
+						cancer.
+					</p>
+				</div>
+				<div class="how-to-use-icon-box">
+					<i class="fas fa-heartbeat"></i>
+					<h4>Get Results</h4>
+					<p>
+						Get an instant result with the likelihood of skin cancer, helping
+						you take the next steps.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Features Section -->
+	<section class="features-section py-5">
+		<div class="container">
+			<h2 class="text-center mb-5">Why Choose Us?</h2>
+			<div class="row">
+				<div class="col-md-4 text-center">
+					<i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+					<h4>Reliable Results</h4>
+					<p>
+						Our advanced AI system ensures accurate and reliable skin cancer
+						detection.
+					</p>
+				</div>
+				<div class="col-md-4 text-center">
+					<i class="fas fa-user-md fa-3x text-success mb-3"></i>
+					<h4>Trusted by Doctors</h4>
+					<p>
+						Medical professionals trust our platform for its accuracy and
+						speed.
+					</p>
+				</div>
+				<div class="col-md-4 text-center">
+					<i class="fas fa-globe fa-3x text-success mb-3"></i>
+					<h4>Global Reach</h4>
+					<p>
+						Our platform is accessible worldwide, providing peace of mind to
+						users globally.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Chatbot Button -->
+	<div
+		id="chatbot-btn"
+		class="chatbot-btn"
+	>
+		<i class="fas fa-comment"></i>
+	</div>
+
+	<!-- Chatbot Modal -->
+	<div
+		id="chatbot-modal"
+		class="chatbot-modal"
+	>
+		<div class="chatbot-header">
+			<h4>Chat with us</h4>
+			<button
+				id="close-chat"
+				class="close-btn"
+			>
+				&times;
+			</button>
+		</div>
+		<div class="chatbot-body">
+			<p>Hi! How can I help you today?</p>
+		</div>
+	</div>
+{% endblock %}
