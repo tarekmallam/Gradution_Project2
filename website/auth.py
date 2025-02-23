@@ -1,29 +1,21 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-import psycopg2
 from functools import wraps
 import os
 from PIL import Image
 import numpy as np
 import tensorflow as tf
+from supabase import create_client, Client  # Supabase SDK
 
 auth = Blueprint('auth', __name__)
 
-# Environment-based database connection
-def create_connection():
-    return psycopg2.connect(
-        host=os.getenv('DB_HOST', 'localhost'),
-        dbname=os.getenv('DB_NAME', 'skin_cancer'),
-        user=os.getenv('DB_USER', 'postgres'),
-        password=os.getenv('DB_PASSWORD', '1172002'),
-        port=os.getenv('DB_PORT', '5432')
-    )
+# Initialize Supabase client
+SUPABASE_URL = os.getenv("SUPABASE_URI")
+SUPABASE_API_KEY = os.getenv("SUPABASE_API_KEY")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_API_KEY)
 
-# Load the model
-model = tf.keras.models.load_model('skin_cancer_classifier_model.h5')
-
-# Class labels
+# Class labels for image classification
 CLASSES = [
     'Actinic Keratosis',
     'Basal Cell Carcinoma',
@@ -48,8 +40,6 @@ def process_image(image_path):
     img_array = (img_array - np.mean(img_array)) / np.std(img_array)
     return img_array
 
-
-
 # Decorator for admin-only routes
 def admin_required(f):
     @wraps(f)
@@ -69,24 +59,24 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        
         try:
-            with create_connection() as conn:
-                with conn.cursor() as cursor:
-                    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
-                    user = cursor.fetchone()
-
-                    if user:
-                        user_id, user_email, hashed_password, is_admin = user
-                        if check_password_hash(hashed_password, password):
-                            session['user_id'] = user_id
-                            session['email'] = user_email
-                            session['is_admin'] = is_admin
-                            flash('Login successful!', 'success')
-                            return redirect(url_for('auth.home'))
-                        else:
-                            flash('Invalid email or password.', 'danger')
-                    else:
-                        flash('Invalid email or password.', 'danger')
+            # Fetch user from Supabase
+            response = supabase.table('users').select('*').eq('email', email).execute()
+            if response.data:
+                user = response.data[0]  # First user (should be unique)
+                
+                if check_password_hash(user['password'], password):
+                    session['user_id'] = user['userID']
+                    session['email'] = user['email']
+                    session['is_admin'] = user.get('is_admin', False)  # Default to False if missing
+                    
+                    flash('Login successful!', 'success')
+                    return redirect(url_for('auth.home'))
+                else:
+                    flash('Invalid email or password.', 'danger')
+            else:
+                flash('User not found.', 'danger')
         except Exception as e:
             print(f"Error: {e}")
             flash('An error occurred. Please try again.', 'danger')
@@ -109,25 +99,33 @@ def signup():
             flash('Password must be at least 7 characters.', 'error')
         else:
             try:
-                with create_connection() as conn:
-                    with conn.cursor() as cursor:
-                        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
-                        if cursor.fetchone():
-                            flash('Email already registered. Please log in.', 'error')
-                        else:
-                            hashed_password = generate_password_hash(password, method='sha256')
-                            cursor.execute(
-                                "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)",
-                                (name, email, hashed_password)
-                            )
-                            conn.commit()
-                            flash('Account created successfully!', 'success')
-                            return render_template("index.html")
+                # Check if email exists
+                response = supabase.table('users').select('*').eq('email', email).execute()
+                if response.data:
+                    flash('Email already registered. Please log in.', 'error')
+                else:
+                    hashed_password = generate_password_hash(password, method='sha256')
+
+                    # Insert new user into Supabase
+                    new_user = {
+                        "userID": str(uuid.uuid4()),  # Generate UUID for user
+                        "email": email,
+                        "password": hashed_password,
+                        "username": name,
+                        "role": "user",  # Default role
+                        "registrationDate": "NOW()"
+                    }
+                    
+                    supabase.table('users').insert(new_user).execute()
+
+                    flash('Account created successfully!', 'success')
+                    return redirect(url_for('auth.login'))
             except Exception as e:
                 print(f"Error: {e}")
                 flash('An error occurred. Please try again.', 'danger')
 
     return render_template('signup.html')
+
 
 @auth.route('/logout')
 def logout():
@@ -169,37 +167,69 @@ def contact_us():
 def blog():
     return render_template('blog.html')
 
+@auth.route('/ak')
+def ak():
+    return render_template('ak.html')
+
+@auth.route('/bbc')
+def bbc():
+    return render_template('bbc.html')
+
+@auth.route('/bkl')
+def bkl():
+    return render_template('bkl.html')
+
+@auth.route('/df')
+def df():
+    return render_template('df.html')
+
+@auth.route('/nv')
+def nv():
+    return render_template('nv.html')
+
+@auth.route('/scc')
+def scc():
+    return render_template('scc.html')
+
+@auth.route('/vl')
+def vl():
+    return render_template('vl.html')
+
+@auth.route('/melanoma')
+def melanoma():
+    return render_template('melanoma.html')
+
 @auth.route('/detect')
 def detect():
-    return render_template('detecth.html')
+    return render_template('detect.html')
 
-@auth.route('/predict', methods=['POST'])
-def predict():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file uploaded'}), 400
+# @auth.route('/predict', methods=['POST'])
+# def predict():source GP_2025/bin/activate
+#     if 'file' not in request.files:
+#         return jsonify({'error': 'No file uploaded'}), 400
     
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No file selected'}), 400
+#     file = request.files['file']
+#     if file.filename == '':
+#         return jsonify({'error': 'No file selected'}), 400
     
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(auth.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+#     if file and allowed_file(file.filename):
+#         filename = secure_filename(file.filename)
+#         filepath = os.path.join(auth.config['UPLOAD_FOLDER'], filename)
+#         file.save(filepath)
         
-        # Process image and make prediction
-        img_array = process_image(filepath)
-        predictions = model.predict(img_array)
-        predicted_class = CLASSES[np.argmax(predictions[0])]
-        confidence = float(np.max(predictions[0]) * 100)
+#         # Process image and make prediction
+#         img_array = process_image(filepath)
+#         predictions = model.predict(img_array)
+#         predicted_class = CLASSES[np.argmax(predictions[0])]
+#         confidence = float(np.max(predictions[0]) * 100)
         
-        return jsonify({
-            'class': predicted_class,
-            'confidence': confidence,
-            'image_path': f'uploads/{filename}'
-        })
+#         return jsonify({
+#             'class': predicted_class,
+#             'confidence': confidence,
+#             'image_path': f'uploads/{filename}'
+#         })
     
-    return jsonify({'error': 'Invalid file type'}), 400
+#     return jsonify({'error': 'Invalid file type'}), 400
 
 
 @auth.route('/add_topic', methods=['GET', 'POST'])

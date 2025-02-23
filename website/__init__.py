@@ -1,6 +1,6 @@
 from flask import Flask
 import os
-import tensorflow as tf
+# import tensorflow as tf
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +13,9 @@ def create_app():
 
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+
+    # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URI')
+    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     
     # Ensure upload directory exists

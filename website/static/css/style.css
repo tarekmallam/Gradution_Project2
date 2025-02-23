@@ -1,6 +1,6 @@
 /* Custom Styles */
 body {
-	font-family: 'Cursive';
+	font-family: 'Arial', sans-serif;
 	margin: 0;
 	padding: 0;
 	background-color: #f4f6f8;
@@ -10,83 +10,80 @@ body {
 .navbar {
 	background-color: #1abc9c;
 }
-/* skin cancer deductions  */
+
 .navbar .navbar-brand {
-	display: block;
-	font-size: 3rem;
-	margin-left: -250px;
-	padding-right: 900px;
-	font-weight: bolder;
+	font-size: 1.8rem;
+	font-weight: bold;
 	color: white;
 }
 
-.nav-link {
-	padding-left: 200px;
+.navbar-nav .nav-link {
 	color: white;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 	transition: color 0.3s;
-	margin-right: 20px;
-
-	.button-container {
-		display: flex;
-		margin-right: 20px;
-		justify-content: flex-end;
-	}
 }
 
-.nav-link:hover {
+/* active */
+.navbar-nav .nav-item.active .nav-link {
+	color: #0d3863;
+}
+
+
+
+.navbar-nav .nav-link:hover {
 	color: #34495e;
 }
 
 /* Hero Section */
 .hero-section {
 	position: relative;
-	height: 50vh;
+
 	background: url('https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg')
 		no-repeat center center;
-	background-size: 60%;
-	color: #1abc9c;
+	background-size: cover;
+	color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	padding: 10px 10px;
-	margin-left: 10px;
+	padding: 0 20px;
 }
 
 .hero-overlay {
-	background: #1abc9c;
+	background: rgba(0, 0, 0, 0.5);
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	margin-left: 10px;
+}
+
+.hero-content {
+	position: relative;
+	z-index: 1;
+	max-width: 800px;
 }
 
 .hero-content h1 {
-	font-size: 3rem;
+	font-size: 4rem;
 	margin-bottom: 20px;
-	margin-left: 10px;
 }
 
 .hero-content p {
-	font-size: 1.5rem;
-	margin-bottom: 40px;
+	font-size: 1.5rem; /* Adjusted font size */
+	margin-bottom: 0; /* Removed excessive margin */
 }
-
 /* Button Styles */
 .btn-primary {
-	background-color: #1abc9c;
-	border: 30%;
-	padding: 12px 12px;
+	background-color: #07f8c8;
+	border: none;
+	padding: 12px 30px;
 	font-size: 1.2rem;
-	border-radius: 30px;
-	margin-left: 10px;
+	border-radius: 50px;
 }
 
-primary:hover {
-	background-color: #1abc9c;
+.btn-primary:hover {
+	background-color: #16a085;
 }
 
 /* Services Section */
@@ -98,9 +95,9 @@ primary:hover {
 
 .service-item {
 	text-align: center;
-	background-color: #1abc9c;
+	background-color: #ecf0f1;
 	border-radius: 10px;
-	/* padding: 30px; */
+	padding: 30px;
 	width: 30%;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease-in-out;
@@ -122,12 +119,12 @@ primary:hover {
 
 .service-item p {
 	font-size: 1rem;
-	color: #f3f9fa;
+	color: #7f8c8d;
 }
 
 /* How to Use Section */
 .how-to-use-section {
-	background-color: #1abc9c;
+	background-color: #ecf0f1;
 	padding: 60px 0;
 }
 
@@ -435,8 +432,6 @@ primary:hover {
 #hero-section .carousel-item {
 	max-height: 625px;
 }
-
-/* change color gradient  */
 .text-white {
 	color: red; /* Fallback color for older browsers */
 	background: linear-gradient(to left, #8360c3, #2ebf91);
@@ -445,6 +440,7 @@ primary:hover {
 	-webkit-text-fill-color: transparent;
 	color: transparent;
 }
+
 /* General styles */
 
 /* Center the card */
@@ -578,4 +574,56 @@ a:hover {
 /* Chatbot Messages */
 .chatbot-body p {
 	margin: 10px 0;
+}
+
+
+/* Blog Card Styles */
+
+
+.blog-card {
+	perspective: 1000px;
+	width: 100%;
+	height: 300px;
+}
+
+/* shodaow if hover */
+.blog-card:hover .blog-inner {
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: transform 0.6s;
+}
+.blog-card:hover .blog-inner {
+	transform: rotateY(180deg);
+}
+.blog-front, .blog-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.blog-front img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.blog-back {
+	background: #1abc9c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	transform: rotateY(180deg);
+}
+
+.blog-back p {
+	color: white;
+	font-size: 1.1rem;
 }

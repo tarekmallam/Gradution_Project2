@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Skin Cancer Detection</title>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="style.css"
+		/>
+  <style>
+			body {
+				font-family: 'Poppins', sans-serif;
+				text-align: center;
+				background-color: #f4f4f9;
+				margin: 0;
+			}
+			.container-content {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				height: auto;
+				padding: 20px;
+				flex-wrap: wrap;
+			}
+			.chart-container,
+			.image-container {
+				width: 100%;
+				max-width: 600px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: white;
+
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+			}
+			canvas {
+				max-width: 100%;
+				width: 100%;
+			}
+			.image-container img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 10px;
+			}
+		</style>
+  </head>
+					<body>
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container">
+				<!-- Logo aligned to the left -->
+				<a
+					class="navbar-brand"
+					href="#"
+					>Skin Cancer Detection</a
+				>
+				<!-- Navbar toggler for mobile view -->
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<!-- Links aligned to the right -->
+				<div class="collapse navbar-collapse"
+					id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="/"
+								>Home</a
+							>
+						</li>
+            <li class="nav-item">
+							<a
+								class="nav-link"
+								href="/detect"
+								>Detect</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="/about"
+								>About</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="/blog"
+								>Blog</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="/contact"
+								>Contact</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	
+
+		<h2 style="color: #333">Dynamic Pie Chart</h2>
+		<div class="container-content">
+			<div class="chart-container">
+				<canvas id="pieChart"></canvas>
+			</div>
+			<div class="image-container">
+				<img
+          src="chrome_zLfaXMUXo6.png"
+					alt="Uploaded Image"
+				/>
+			</div>
+		</div>
+
+		<script>
+			const ctx = document.getElementById('pieChart').getContext('2d')
+			const data = {
+				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+				datasets: [
+					{
+						label: 'Values',
+						data: [12, 19, 3, 5, 2, 3],
+						backgroundColor: [
+							'rgba(255, 99, 132, 0.7)',
+							'rgba(54, 162, 235, 0.7)',
+							'rgba(255, 206, 86, 0.7)',
+							'rgba(75, 192, 192, 0.7)',
+							'rgba(153, 102, 255, 0.7)',
+							'rgba(255, 159, 64, 0.7)',
+						],
+						borderColor: 'rgba(0, 0, 0, 0.1)',
+						borderWidth: 1,
+					},
+				],
+			}
+
+			const config = {
+				type: 'pie',
+				data: data,
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							labels: {
+								font: {
+									size: 14,
+								},
+							},
+						},
+					},
+				},
+			}
+
+			new Chart(ctx, config)
+		</script>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
