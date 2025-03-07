@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+import secrets
 # import tensorflow as tf
 
 def create_app():
@@ -13,6 +14,9 @@ def create_app():
 
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'fallback_key')
+
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URI')
     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

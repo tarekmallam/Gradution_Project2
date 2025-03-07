@@ -7,13 +7,33 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 from supabase import create_client, Client  # Supabase SDK
+from dotenv import load_dotenv
+import psycopg2
+import uuid
+from datetime import datetime
+import secrets
 
+
+load_dotenv()
 auth = Blueprint('auth', __name__)
 
-# Initialize Supabase client
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+try:
+    conn = psycopg2.connect(DATABASE_URL)
+    print("✅ Successfully connected to the database!")
+    conn.close()
+except Exception as e:
+    print(f"❌ Connection failed: {e}")
+
 SUPABASE_URL = os.getenv("SUPABASE_URI")
 SUPABASE_API_KEY = os.getenv("SUPABASE_API_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_API_KEY)
+
+if SUPABASE_URL and SUPABASE_API_KEY:
+    supabase: Client = create_client(SUPABASE_URL, SUPABASE_API_KEY)
+    print("✅ Successfully connected to Supabase!")
+else:
+    print("❌ Missing Supabase credentials. Check your .env file.")
 
 # Class labels for image classification
 CLASSES = [
@@ -41,88 +61,105 @@ def process_image(image_path):
     return img_array
 
 # Decorator for admin-only routes
-def admin_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get('is_admin'):
-            flash('You do not have permission to access this page.', 'danger')
-            return redirect(url_for('auth.login'))
-        return f(*args, **kwargs)
-    return decorated_function
+# def admin_required(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         if not session.get('is_admin'):
+#             flash('You do not have permission to access this page.', 'danger')
+#             return redirect(url_for('auth.login'))
+#         return f(*args, **kwargs)
+#     return decorated_function
 
 @auth.route('/')
 def home():
     return render_template("index.html")
 
+# 🟢 Login Route
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        
+        email = request.form.get('email')
+        password = request.form.get('password')
+
         try:
-            # Fetch user from Supabase
-            response = supabase.table('users').select('*').eq('email', email).execute()
-            if response.data:
-                user = response.data[0]  # First user (should be unique)
-                
-                if check_password_hash(user['password'], password):
-                    session['user_id'] = user['userID']
-                    session['email'] = user['email']
-                    session['is_admin'] = user.get('is_admin', False)  # Default to False if missing
-                    
-                    flash('Login successful!', 'success')
-                    return redirect(url_for('auth.home'))
-                else:
-                    flash('Invalid email or password.', 'danger')
+            response = supabase.table('user').select('*').eq('email', email).single().execute()
+            user = response.data
+            
+            if user and check_password_hash(user['password'], password):
+                session.clear()
+                session.permanent = True
+                session['userid'] = user['userID']
+                session['email'] = user['email']
+                session['role'] = user.get('role', 'user')
+
+                flash('✅ Login successful!', 'success')
+                return redirect(url_for('dashboard' if user['role'] == 'admin' else 'main.home'))
             else:
-                flash('User not found.', 'danger')
+                flash('❌ Invalid email or password.', 'danger')
         except Exception as e:
-            print(f"Error: {e}")
-            flash('An error occurred. Please try again.', 'danger')
+            flash('⚠ An error occurred during login. Please try again.', 'danger')
 
     return render_template('login.html')
 
+# 🔵 Signup Route
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
+        # ✅ Get form data and strip any leading/trailing spaces
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+        confirm_password = request.form.get('confirm_password', '').strip()
 
+        # ✅ Validate inputs to avoid NoneType errors
+        if not email or not password or not confirm_password:
+            flash('⚠ All fields are required.', 'error')
+            return redirect(url_for('auth.signup'))
+        
         if len(email) < 4:
-            flash('Email must be greater than 4 characters.', 'error')
-        elif password != confirm_password:
-            flash('Passwords don\'t match.', 'error')
-        elif len(password) < 7:
-            flash('Password must be at least 7 characters.', 'error')
-        else:
-            try:
-                # Check if email exists
-                response = supabase.table('users').select('*').eq('email', email).execute()
-                if response.data:
-                    flash('Email already registered. Please log in.', 'error')
-                else:
-                    hashed_password = generate_password_hash(password, method='sha256')
+            flash('⚠ Email must be at least 4 characters long.', 'error')
+            return redirect(url_for('auth.signup'))
 
-                    # Insert new user into Supabase
-                    new_user = {
-                        "userID": str(uuid.uuid4()),  # Generate UUID for user
-                        "email": email,
-                        "password": hashed_password,
-                        "username": name,
-                        "role": "user",  # Default role
-                        "registrationDate": "NOW()"
-                    }
-                    
-                    supabase.table('users').insert(new_user).execute()
+        if password != confirm_password:
+            flash('⚠ Passwords do not match.', 'error')
+            return redirect(url_for('auth.signup'))
 
-                    flash('Account created successfully!', 'success')
-                    return redirect(url_for('auth.login'))
-            except Exception as e:
-                print(f"Error: {e}")
-                flash('An error occurred. Please try again.', 'danger')
+        if len(password) < 7:
+            flash('⚠ Password must be at least 7 characters long.', 'error')
+            return redirect(url_for('auth.signup'))
+
+        try:
+            # ✅ Check if the email is already registered
+            response = supabase.table('users').select('email').eq('email', email).single().execute()
+            print("Response from DB:", response)  # Debugging line
+            
+            if response.data:
+                flash('⚠ This email is already registered.', 'error')
+                return redirect(url_for('auth.signup'))
+
+            # ✅ Hash the password for security
+            hashed_password = generate_password_hash(password, method='sha256')
+
+            new_user = {
+                "userID": str(uuid.uuid4()),
+                "email": email,
+                "password": hashed_password,
+                "username": name,
+                "role": "user",
+                "registrationDate": datetime.utcnow().isoformat()
+            }
+
+            # ✅ Insert new user into the database
+            insert_response = supabase.table('users').insert(new_user).execute()
+            print("Insert response:", insert_response)  # Debugging line
+
+            flash('🎉 Account created successfully!', 'success')
+            print("Redirecting to login page")  # Debugging line
+            return redirect(url_for('auth.login'))  # ✅ Redirect after successful signup
+
+        except Exception as e:
+            flash(f'⚠ An error occurred during signup: {str(e)}', 'danger')
+            print("Signup error:", str(e))  # Debugging line
 
     return render_template('signup.html')
 
@@ -130,26 +167,31 @@ def signup():
 @auth.route('/logout')
 def logout():
     session.clear()
-    flash('Logged out successfully.', 'info')
+    flash('✅ Logged out successfully.', 'info')
     return redirect(url_for('auth.login'))
+
+@auth.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 
 @auth.route('/forgot')
 def forgot():
     return redirect(url_for('auth.login'))
 
-@auth.route('/manage_users')
-@admin_required
-def manage_users():
-    try:
-        with create_connection() as conn:
-            with conn.cursor() as cursor:
-                cursor.execute("SELECT id, name, email FROM users")
-                users = cursor.fetchall()
-        return render_template('manage_users.html', users=users)
-    except Exception as e:
-        print(f"Error: {e}")
-        flash('Failed to retrieve users.', 'danger')
-        return redirect(url_for('auth.home'))
+# @auth.route('/manage_users')
+# @admin_required
+# def manage_users():
+#     try:
+#         with create_connection() as conn:
+#             with conn.cursor() as cursor:
+#                 cursor.execute("SELECT id, name, email FROM users")
+#                 users = cursor.fetchall()
+#         return render_template('manage_users.html', users=users)
+#     except Exception as e:
+#         print(f"Error: {e}")
+#         flash('Failed to retrieve users.', 'danger')
+#         return redirect(url_for('auth.home'))
 
 @auth.route('/profile')
 def profile():
@@ -202,6 +244,11 @@ def melanoma():
 @auth.route('/detect')
 def detect():
     return render_template('detect.html')
+
+@auth.route('/predict', methods=['POST'])
+def predict():
+    return render_template('result.html')
+
 
 # @auth.route('/predict', methods=['POST'])
 # def predict():source GP_2025/bin/activate

@@ -26,56 +26,51 @@
         .btn-custom:hover {
             background-color: #1abc9c; 
         }
-        .text-decoration-none{
-          color: #1abc9c; 
+        .text-decoration-none {
+            color: #1abc9c; 
         }
     </style>
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow">
-        <h3 class="text-center mb-4" id="formTitle">CREATE AN ACCOUNT</h3>
-        <form id="userForm" action="/signup">
+        <h3 class="text-center mb-3" id="formTitle">CREATE AN ACCOUNT</h3>
+
+        <!-- ✅ Flash Messages Section -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="mb-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- ✅ Signup Form -->
+        <form id="userForm" action="/signup" method="POST">
             <div class="mb-3">
-                <input type="text" id="fullName" class="form-control" placeholder="Full Name" required>
+                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
             </div>
             <div class="mb-3">
-                <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
             </div>
             <div class="mb-3">
-                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
             </div>
             <div class="mb-3">
-                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
             </div>
-            <button type="button" id="submitButton" class="btn btn-custom w-100 mb-2">Sign Up</button>
-            <button type="button" id="editButton" class="btn btn-secondary w-100 mb-2 d-none">Edit Profile</button>
+            <button type="submit" class="btn btn-custom w-100 mb-2">Sign up</button>
             <div class="text-center">
                 Already have an account? <a href="/login" class="text-decoration-none">Log In</a>
             </div>
         </form>
     </div>
 
-    <!-- Bootstrap & JavaScript -->
-    <!-- <script>
-        let isEditing = false;
-        
-        document.getElementById("submitButton").addEventListener("click", function() {
-            if (!isEditing) {
-                alert("Account Created Successfully!");
-                document.getElementById("submitButton").classList.add("d-none");
-                document.getElementById("editButton").classList.remove("d-none");
-                document.getElementById("formTitle").innerText = "Profile Information";
-            } else {
-                alert("Profile Updated Successfully!");
-            }
-        });
-
-        document.getElementById("editButton").addEventListener("click", function() {
-            isEditing = true;
-            document.getElementById("submitButton").innerText = "Save Changes";
-            document.getElementById("submitButton").classList.remove("d-none");
-            document.getElementById("editButton").classList.add("d-none");
-        });
-    </script> -->
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
