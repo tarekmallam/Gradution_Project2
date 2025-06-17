@@ -2,3 +2,5 @@
 venv/
 env/
 my_env/
+
+model.h5
