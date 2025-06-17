@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block title %}Detect{%endblock%}
+{% block page %}detect{% endblock %}
 {%block content%}
 		<!-- Hero Section -->
 		<section
@@ -13,27 +14,6 @@
 					style="
 						background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
 							no-repeat center center;
-						background-size: 80%;
-						height: 100vh;
-					"
-				>
-					<div
-						class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
-					>
-						<h1
-							class="text-white"
-							style="font-size: 6rem; font-weight: 900"
-						>
-							Detect Skin Cancer Early
-						</h1>
-					</div>
-				</div>
-				<!-- Slide 2 -->
-				<div
-					class="carousel-item"
-					style="
-						background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
-							no-repeat center center;
 						background-size: cover;
 						height: 100vh;
 					"
@@ -43,12 +23,22 @@
 					>
 						<h1
 							class="text-white"
-							style="font-size: 4rem"
+							style="font-size: 4rem; padding-bottom: 450px"
 						>
-							Accurate AI-powered Detection
+							Detect Skin Cancer Early
 						</h1>
 					</div>
 				</div>
+					<!-- Slide 2 -->
+            <div class="carousel-item" style=" background: url('https://github.com/zbari023/Deep_learning_Skincancerlib/blob/853975b6dd629f7cca431da62fa4a50dcacc2c22/static/assets/img/Medical-Derm-SKIN-CANCER-SCREENING.jpg?raw=true')
+          no-repeat center 30%; /* Adjusted vertical position to 30% */
+						background-size: cover;
+						height: 100vh;
+					">
+            <div class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center">
+            <h1 class="text-white" style="font-size: 4rem; padding-bottom: 450px"> Accurate AI-powered Detection</h1>
+            </div>
+        </div>
 				<!-- Slide 3 -->
 				<div
 					class="carousel-item"
@@ -106,20 +96,15 @@
 					<!-- Warning message -->
 					<span
 						id="warningMessage"
-						style="
-							color: red;
-							display: none;
-							font-size: 1.5rem;
-							font-weight: bolder;
-						"
+						style="color: red; display: none; font-size: 1.5rem; font-weight: bolder"
 					>
 						Please select an image before analyzing!
 					</span>
 					<form
-						action="/predict"
 						id="uploadForm"
 						method="POST"
 						enctype="multipart/form-data"
+						action="/predict"
 					>
 						<input
 							id="imageInput"
@@ -132,84 +117,13 @@
 						<!-- Analyze button -->
 						<button
 							id="btn1"
-							type="button"
+							type="submit"
 							class="btn btn-primary"
 						>
 							Analyze
 						</button>
 					</form>
 				</div>
-
-				<!-- Result Section -->
-				<div
-					class="result-section"
-					id="result"
-				>
-					<h3>Results will be displayed here.</h3>
-				</div>
 			</div>
 		</section>
-		<!-- Chatbot Button -->
-		<div
-			id="chatbot-btn"
-			class="chatbot-btn"
-		>
-			<i class="fas fa-comment"></i>
-		</div>
-
-		<!-- Chatbot Modal -->
-		<div
-			id="chatbot-modal"
-			class="chatbot-modal"
-		>
-			<div class="chatbot-header">
-				<h4>Chat with us</h4>
-				<button
-					id="close-chat"
-					class="close-btn"
-				>
-					&times;
-				</button>
-			</div>
-			<div class="chatbot-body">
-				<p>Hi! How can I help you today?</p>
-			</div>
-		</div>
-
-		<!-- Bootstrap JS & Popper.js -->
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-		<script>
-			// Get the chatbot button and modal
-			const chatbotBtn = document.getElementById('chatbot-btn')
-			const chatbotModal = document.getElementById('chatbot-modal')
-			const closeBtn = document.getElementById('close-chat')
-
-			// Show the chatbot modal when button is clicked
-			chatbotBtn.addEventListener('click', function () {
-				chatbotModal.style.display = 'block'
-			})
-
-			// Close the chatbot modal when the close button is clicked
-			closeBtn.addEventListener('click', function () {
-				chatbotModal.style.display = 'none'
-			})
-
-			// check if there isn't input for image
-
-			const imageInput = document.getElementById('imageInput') //input
-			const warningMessage = document.getElementById('warningMessage') //message
-			const analyzeButton = document.getElementById('btn1') // conditon
-
-			analyzeButton.addEventListener('click', function () {
-				if (!imageInput.value) {
-					warningMessage.style.display = 'block'
-				} else {
-					warningMessage.style.display = 'none'
-					window.location.href = 'login.html'
-				}
-			})
-		</script>
-	
-
 {%endblock%}

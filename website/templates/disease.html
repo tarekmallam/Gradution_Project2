@@ -1,0 +1,84 @@
+{% extends "base2.html" %} {% block title %} {{ blog.title }} {% endblock %}
+{% block content %}
+
+<div class="contain">
+  <div class="content">    
+    {% if blog %}
+    <div class="shadow-box"> 
+      <div class="card-header bg-light">
+        <h2 class="card-title mb-0">{{ blog.title }}</h2>
+      </div>
+      <div class="card-body">
+        {% if blog.image_url %}
+            <img src="{{ blog.image_url }}" alt="Blog Main Image" class="img-fluid mb-3" style="max-width:300px;">
+        {% endif %}
+        {% if blog.overview %}
+            <h3 id="Overview">Overview</h3>
+            {% if blog.overview_path %}
+                <img src="{{ blog.overview_path }}" alt="Overview Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.overview }}</p>
+        {% endif %}
+        {% if blog.symptoms %}
+            <h3 id="Symptoms">Symptoms</h3>
+            {% if blog.symptoms_path %}
+                <img src="{{ blog.symptoms_path }}" alt="Symptoms Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.symptoms }}</p>
+        {% endif %}
+        {% if blog.causes %}
+            <h3 id="Causes">Causes</h3>
+            {% if blog.causes_path %}
+                <img src="{{ blog.causes_path }}" alt="Causes Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.causes }}</p>
+        {% endif %}
+        {% if blog.prevention %}
+            <h3 id="Prevention">Prevention</h3>
+            {% if blog.prevention_path %}
+                <img src="{{ blog.prevention_path }}" alt="Prevention Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.prevention }}</p>
+        {% endif %}
+        {% if blog.treatment %}
+            <h3 id="Treatment">Treatment</h3>
+            {% if blog.treatment_path %}
+                <img src="{{ blog.treatment_path }}" alt="Treatment Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.treatment }}</p>
+        {% endif %}
+        {% if blog.doctor %}
+            <h3 id="Doctor">When to See a Doctor</h3>
+            {% if blog.doctor_path %}
+                <img src="{{ blog.doctor_path }}" alt="Doctor Image" class="img-fluid mb-2" style="max-width:200px;">
+            {% endif %}
+            <p>{{ blog.doctor }}</p>
+        {% endif %}
+        <div class="text-muted mt-3" style="font-size:0.95em;">
+            Posted: 
+            {% if blog.postdate %}
+                {{ blog.postdate[:19].replace('T', ' ') }}
+            {% elif blog.created_at %}
+                {{ blog.created_at[:19].replace('T', ' ') }}
+            {% else %}
+                N/A
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info text-center">No disease details found.</div>
+{% endif %}
+</div>
+  <div class="sidebar">
+    <h3>On this page</h3>
+    <a href="#Overview">Overview</a>
+    <a href="#Symptoms">Symptoms</a>
+    <a href="#Causes">Causes</a>
+    <a href="#Prevention">Prevention</a>
+    <a href="#Treatment">Treatment</a>
+    <a href="#Doctor">When to See a Doctor</a>
+    <a href="blog.html" class="button">VIEW ALL<br>Skin Cancer</a>
+  </div>
+</div>
+{% endblock %}

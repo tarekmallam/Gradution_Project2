@@ -1,0 +1,124 @@
+{% extends "base.html" %} {% block title %}Result{%endblock%}
+{%block content%}
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Skin Cancer Detection</title>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="style.css"
+		/>
+  <style>
+			body {
+				font-family: 'Poppins', sans-serif;
+				text-align: center;
+				background-color: #f4f4f9;
+				margin: 0;
+			}
+			.container-content {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				height: auto;
+				padding: 20px;
+				flex-wrap: wrap;
+			}
+			.chart-container,
+			.image-container {
+				width: 100%;
+				max-width: 600px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: white;
+
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+			}
+			canvas {
+				max-width: 100%;
+				width: 100%;
+			}
+			.image-container img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 10px;
+				display: block;
+			}
+		</style>
+  </head>
+	<body>
+
+		<h2 style="color: #333">Prediction Result</h2>
+		<div class="container-content">
+			<div class="chart-container">
+				<!-- Optionally, you can show a pie chart for confidence -->
+				<canvas id="pieChart"></canvas>
+			</div>
+			<div class="image-container">
+                {% if image_url %}
+                  <img src="{{ image_url }}" alt="Uploaded Image" style="max-width:100%;height:auto;border-radius:10px;display:block;" />
+                {% else %}
+					<p>No image available.</p>
+                {% endif %}
+			</div>
+		</div>
+		<div style="margin-top: 2rem;">
+			<h3>Class: <span style="color: #007bff;">{{ predicted_class }}</span></h3>
+			<h4>Confidence: <span style="color: #28a745;">{{ confidence }}%</span></h4>
+		</div>
+
+		<script>
+			const ctx = document.getElementById('pieChart').getContext('2d');
+			const data = {
+				labels: ['Confidence', 'Other'],
+				datasets: [{
+					label: 'Confidence',
+					data: [{{ confidence|default(0, true) }}, {{ 100 - (confidence|float)|default(100, true) }}],
+					backgroundColor: [
+						'rgba(54, 162, 235, 0.7)',
+						'rgba(200, 200, 200, 0.3)'
+					],
+					borderColor: 'rgba(0, 0, 0, 0.1)',
+					borderWidth: 1,
+				}],
+			};
+			const config = {
+				type: 'pie',
+				data: data,
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							labels: {
+								font: {
+									size: 14,
+								},
+							},
+						},
+					},
+				},
+			};
+			new Chart(ctx, config);
+		</script>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+{%endblock%}

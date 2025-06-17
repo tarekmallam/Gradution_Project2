@@ -1,474 +1,225 @@
-{% extends "base.html" %} {% block title %}Home{%endblock%}
+{% extends "base.html" %} {% block title %}Blog{%endblock%}
 {%block content%}
-
+	
 	<section
-		id="hero-section"
-		class="carousel slide"
-		data-bs-ride="carousel"
+	id="hero-section"
+	class="carousel slide"
+	data-bs-ride="carousel"
 	>
-		<div class="carousel-inner">
-			<!-- Slide 1 -->
+	<div class="carousel-inner">
+		<!-- Slide 1 -->
+		<div
+			class="carousel-item active"
+			style="
+				background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
+					no-repeat center center;
+				background-size: cover;
+				height: 100vh;
+			"
+		>
 			<div
-				class="carousel-item active"
-				style="
-					background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
-						no-repeat center center;
-					background-size: cover;
-					height: 100vh;
-				"
+				class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
 			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+				<h1
+					class="text-white"
+					style="font-size: 4rem; padding-bottom: 450px"
 				>
-					<h1
-						class="text-white"
-						style="font-size: 7rem; font-weight: 900"
-					>
-						Detect Skin Cancer Early
-					</h1>
-				</div>
-			</div>
-			<!-- Slide 2 -->
-			<div
-				class="carousel-item"
-				style="
-					background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
-						no-repeat center center;
-					background-size: cover;
-					height: 100vh;
-				"
-			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
-				>
-					<h1
-						class="text-white"
-						style="font-size: 4rem"
-					>
-						Accurate AI-powered Detection
-					</h1>
-				</div>
-			</div>
-			<!-- Slide 3 -->
-			<div
-				class="carousel-item"
-				style="
-					background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
-						no-repeat center center;
-					background-size: cover;
-					height: 100vh;
-				"
-			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
-				>
-					<h1
-						class="text-white"
-						style="font-size: 4rem"
-					></h1>
-				</div>
+					Detect Skin Cancer Early
+				</h1>
 			</div>
 		</div>
-		<!-- Controls -->
-		<button
-			class="carousel-control-prev"
-			type="button"
-			data-bs-target="#hero-section"
-			data-bs-slide="prev"
+		<!-- Slide 2 -->
+	<div class="carousel-item" style=" background: url('https://github.com/zbari023/Deep_learning_Skincancerlib/blob/853975b6dd629f7cca431da62fa4a50dcacc2c22/static/assets/img/Medical-Derm-SKIN-CANCER-SCREENING.jpg?raw=true')
+	no-repeat center 30%; /* Adjusted vertical position to 30% */
+				background-size: cover;
+				height: 100vh;
+			">
+	<div class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center">
+	<h1 class="text-white" style="font-size: 4rem; padding-bottom: 450px"> Accurate AI-powered Detection</h1>
+	</div>
+	</div>
+		<!-- Slide 3 -->
+		<div
+			class="carousel-item"
+			style="
+				background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
+					no-repeat center center;
+				background-size: cover;
+				height: 100vh;
+			"
 		>
-			<span
-				class="carousel-control-prev-icon"
-				aria-hidden="true"
-			></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button
-			class="carousel-control-next"
-			type="button"
-			data-bs-target="#hero-section"
-			data-bs-slide="next"
-		>
-			<span
-				class="carousel-control-next-icon"
-				aria-hidden="true"
-			></span>
-			<span class="visually-hidden">Next</span>
-		</button>
+			<div
+				class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
+			>
+				<h1
+					class="text-white"
+					style="font-size: 4rem"
+				></h1>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Controls -->
+	<button
+		class="carousel-control-prev"
+		type="button"
+		data-bs-target="#hero-section"
+		data-bs-slide="prev"
+	>
+		<span
+			class="carousel-control-prev-icon"
+			aria-hidden="true"
+		></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button
+		class="carousel-control-next"
+		type="button"
+		data-bs-target="#hero-section"
+		data-bs-slide="next"
+	>
+		<span
+			class="carousel-control-next-icon"
+			aria-hidden="true"
+		></span>
+		<span class="visually-hidden">Next</span>
+	</button>
 	</section>
-	<!-- Blog Cards Section -->
-	<div class="container my-5">
-		<h2 class="text-center mb-5">Latest Blogs</h2>
-		<div class="row">
-			<!-- Blog Card 1 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal1"
-				>
-					<img
-						src="C:\Users\HP\Downloads\66ac1ba0f5ce0705b94e28a4_66ac1b728fe32a87a807c810_Picture20Basal20Carcinoma.jpeg"
-						alt="Basal Cell Carcinoma"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">Basal Cell Carcinoma (BCC)</h5>
+	
+	<!-- Blog Section -->
+	<section class="blog-section py-5">
+		<div class="container">
+			<h2 class="text-center mb-5">Latest Blogs</h2>
+			<div class="row">
+		<!-- Show dynamic blogs from database first -->
+		{% for blog in blogs %}
+		<div class="col-md-6">
+			<a href="{{ url_for('auth.disease', topic=blog.title|lower|replace(' ', '')|replace('.', '')|replace(',', '')|replace('(', '')|replace(')', '')|replace('-', '')|replace('_', '') ) }}">
+				<div class="blog-card">
+					<div class="blog-image" style="background-image: url('{{ blog.image_url }}');"></div>
+					<div class="blog-content">
+						<h4>{{ blog.title }}</h4>
+						<p>
+							{% if blog.overview %}
+								{{ blog.overview[:80] }}
+							{% elif blog.symptoms %}
+								{{ blog.symptoms[:80] }}
+							{% elif blog.causes %}
+								{{ blog.causes[:80] }}
+							{% elif blog.prevention %}
+								{{ blog.prevention[:80] }}
+							{% elif blog.treatment %}
+								{{ blog.treatment[:80] }}
+							{% elif blog.doctor %}
+								{{ blog.doctor[:80] }}
+							{% else %}
+								No preview available.
+							{% endif %}
+						</p>
+						<img src="{{ blog.image_url }}" alt="Blog Image" class="img-fluid" style="width: 100%; height: 220px; display: block; margin: 0 auto;">
 					</div>
 				</div>
-			</div>
-
-			<!-- Blog Card 2 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal2"
-				>
-					<img
-						src="c:\Users\HP\Downloads\squamous-cell-carcinoma-symtoms-rough-reddish-patch.png"
-						alt="Squamous Cell Carcinoma"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">Squamous Cell Carcinoma (SCC)</h5>
-					</div>
-				</div>
-			</div>
-
-			<!-- Blog Card 3 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal3"
-				>
-					<img
-						src="c:\Users\HP\Downloads\download.jfif"
-						alt="Melanoma"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">Melanoma</h5>
-					</div>
-				</div>
-			</div>
-
-			<!-- Blog Card 4 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal4"
-				>
-					<img
-						src="c:\Users\HP\Downloads\images (2).jfif"
-						alt="benign keratosis-like lesions (bkl)"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">benign keratosis-like lesions (bkl)</h5>
-					</div>
-				</div>
-			</div>
-			<!-- Blog Card 5 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal5"
-				>
-					<img
-						src="c:\Users\HP\Downloads\images.jfif"
-						alt="dermatofibroma"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">dermatofibroma (df)</h5>
-					</div>
-				</div>
-			</div>
-			<!-- Blog Card 6 -->
-			<div class="col-md-6 mb-4">
-				<div
-					class="blog-card"
-					data-bs-toggle="modal"
-					data-bs-target="#blogModal6"
-				>
-					<img
-						src="c:\Users\HP\Downloads\images (1).jfif"
-						alt="vascular lesions"
-					/>
-					<div class="blog-card-body">
-						<h5 class="card-title">vascular lesions (vasc)</h5>
-					</div>
-				</div>
-			</div>
+			</a>
 		</div>
-	</div>
-
-	<!-- Blog Modals -->
-
-	<!-- Modal for Basal Cell Carcinoma (BCC) -->
-	<div
-		class="modal fade"
-		id="blogModal1"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel1"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel1"
-					>
-						Basal Cell Carcinoma (BCC)
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>Basal Cell Carcinoma (BCC)</strong> is a type of
-						epithelial skin cancer that seldom spreads but, if left untreated,
-						can be fatal . It is the most common form of skin cancer.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
+		{% endfor %}
+		<!-- Blog Post 1 -->
+		<div class="col-md-6">
+			<a href="/scc">
+			<div class="blog-card">
+			<div class="blog-image" style="background-image: url('https://www.dermatologyboutique.com/wp-content/uploads/2023/05/squamous-cell-900x450-1-900x450.jpg');"></div>
+			<div class="blog-content">
+		  		<h4>Basal Cell Carcinoma (BCC)</h4>
+		  		<p>Learn about the most common type of skin cancer and its treatment options...</p>
 			</div>
-		</div>
-	</div>
-
-	<!-- Modal for Squamous Cell Carcinoma (SCC) -->
-	<div
-		class="modal fade"
-		id="blogModal2"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel2"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel2"
-					>
-						Squamous Cell Carcinoma (SCC)
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>Squamous Cell Carcinoma (SCC)</strong> is a type of skin
-						cancer that originates in the squamous cells of the skin that are
-						noninvasive and can be treated locally without surgery.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
 			</div>
-		</div>
-	</div>
-
-	<!-- Modal for Melanoma -->
-	<div
-		class="modal fade"
-		id="blogModal3"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel3"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel3"
-					>
-						Melanoma
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>Melanoma</strong> is the deadliest form of skin cancer,
-						originating in the melanocytes and can take many different forms,
-						the pigment-producing cells of the skin.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
+			</a>
 			</div>
+		<!-- Blog Post 2 -->
+		<div class="col-md-6">
+		<a href="/scc">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://www.dermatologyboutique.com/wp-content/uploads/2023/05/squamous-cell-900x450-1-900x450.jpg');"></div>
+		<div class="blog-content">
+		  <h4>Squamous Cell Carcinoma (SCC)</h4>
+		  <p>Understand SCC, its symptoms, and how to detect it early...</p>
 		</div>
-	</div>
-
-	<!-- Modal for benign keratosis-like lesions (bkl) -->
-	<div
-		class="modal fade"
-		id="blogModal4"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel4"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel4"
-					>
-						benign keratosis-like lesions (bkl)
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>Merkel Cell Carcinoma (MCC)</strong>seborrheic
-						keratoses,lichen-planus like keratoses,and solar lentigo,correlate
-						to a seborrheic keratosis or a sun lentigo with regression and
-						inflammation .
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
-			</div>
 		</div>
-	</div>
-	<!-- Modal for dermatofibroma (df) -->
-	<div
-		class="modal fade"
-		id="blogModal5"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel5"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel5"
-					>
-						dermatofibroma (df)
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>dermatofibroma (df)</strong> skin lesions that are either
-						benign growth or an inflammatory response to minor trauma.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
-			</div>
+		</a>
 		</div>
-	</div>
-	<!-- Modal for vascular lesions (vasc) -->
-	<div
-		class="modal fade"
-		id="blogModal6"
-		tabindex="-1"
-		aria-labelledby="blogModalLabel6"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="blogModalLabel6"
-					>
-						vascular lesions (vasc)
-					</h5>
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-					<p>
-						<strong>vascular lesions (vasc)</strong>cherry
-						angiomas,angiokertomas,and pyogenic granulomas are example of
-						benign or mailgnant angiomas .
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button
-						type="button"
-						class="modal-close-btn"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					>
-						Close
-					</button>
-				</div>
-			</div>
+		<!-- Blog Post 3 -->
+		<div class="col-md-6">
+		<a href="/melanoma">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6c/Melanoma.jpg');"></div>
+		<div class="blog-content">
+		  <h4>Melanoma</h4>
+		  <p>Explore the deadliest form of skin cancer and why early detection is crucial...</p>
 		</div>
-	</div>
+		</div>
+		</a>
+		</div>
+		<!-- Blog Post 4 -->
+		<div class="col-md-6">
+		<a href="/bkl">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMZSX75mJXLWl_Vc3PQoJwm6-nQF6tB2vxww&s');"></div>
+		<div class="blog-content">
+		  <h4>Benign Keratosis-like Lesions (BKL)</h4>
+		  <p>Discover how to differentiate benign keratosis from malignant lesions...</p>
+		</div>
+		</div>
+		</a>
+		</div>
+		<!-- Blog Post 5 -->
+		<div class="col-md-6">
+		<a href="/df">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2wjgeKkQ_MqwhjQqDDUbGcMAMEKehQwRuKw&s');"></div>
+		<div class="blog-content">
+		  <h4>Dermatofibroma (DF)</h4>
+		  <p>Learn about dermatofibroma, a harmless skin growth, and when to be concerned...</p>
+		</div>
+		</div>
+		</a>
+		</div>
+		<!-- Blog Post 6 -->
+		<div class="col-md-6">
+		<a href="/vl">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://ensoulclinic.b-cdn.net/wp-content/uploads/2020/01/Vascular-Lesions-min.jpg');"></div>
+		<div class="blog-content">
+		  <h4>Vascular Lesions</h4>
+		  <p>Understand different types of vascular lesions and their implications...</p>
+		</div>
+		</div>
+		</a>
+		</div>
+		<!-- Blog Post 7 -->
+		<div class="col-md-6">
+		<a href="/nv">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://www.researchgate.net/publication/372570345/figure/fig1/AS:11431281176859823@1690283587496/Cancer-de-piel-tipo-Melanocytic-nevinv-fuente.jpg');"></div>
+		<div class="blog-content">
+		  <h4>Melanocytic Nevi (NV)</h4>
+		  <p>Get insights into melanocytic nevi, commonly known as moles, and their risks...</p>
+		</div>
+		</div>
+		</a>
+		</div>
+		<!-- Blog Post 8 -->
+		<div class="col-md-6">
+		<a href="/ak">
+		<div class="blog-card">
+		<div class="blog-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_YGX1czKbD3vAvv-VIOCZDNkJ773GtbHGw&s');"></div>
+		<div class="blog-content">
+		  <h4>Actinic Keratosis (AK)</h4>
+		  <p>Learn how actinic keratosis can develop into skin cancer if left untreated...</p>
+		</div>
+		</div>
+		</a>
+		</div>
+		</div>
+		</div>
+	</section>
 
 {%endblock%}

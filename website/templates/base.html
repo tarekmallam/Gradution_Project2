@@ -1,125 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-	<!-- index -->
+  <!-- index -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skin Cancer Detection</title>
+    <!-- Bootstrap 5.3.0 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome CDN (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Skin Cancer Detection</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'detect' %}active{% endif %}" href="/detect">Detect</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'blog' %}active{% endif %}" href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'contact' %}active{% endif %}" href="/contact">Contact</a>
+        </li>
+        {% if session.get('role') == 'admin' %}
+          <li class="nav-item">
+            <a class="nav-link {% if active_page == 'dashboard' %}active{% endif %}" href="{{ url_for('auth.dashboard') }}">Dashboard</a>
+          </li>
+        {% endif %}
+        {% if 'userid' in session %}
+            <li><a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
+        {% else %}
+            <li><a class="nav-link {% if active_page == 'login' %}active{% endif %}" href="{{ url_for('auth.login') }}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+	<div>
+		{% block content %}
+		{% endblock %}
+	</div>
+    
+    <!-- Chatbot Button: Always show, but restrict sending if not logged in -->
+<button id="chat-toggle-btn" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    background: linear-gradient(135deg, #4f8cff 60%, #1cb5e0 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 16px rgba(79,140,255,0.2);
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s;
+">
+    <span style="display:inline-block;">
+        <!-- Chat icon SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </span>
+</button>
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>{% block title %}{% endblock %}</title>
+	<!-- Chat Window (hidden by default) -->
+	<div id="chat-window" style="
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 420px;
+    height: 540px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+    z-index: 1001;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+">
+    <div style="background: linear-gradient(135deg, #4f8cff 60%, #1cb5e0 100%); color: #fff; padding: 14px 16px; font-weight: 600; font-size: 18px;">
+        Chat
+        <button id="chat-close-btn" style="
+            float: right;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+        ">&times;</button>
+    </div>
+    <div id="chat-messages" style="padding: 14px 16px; height: 390px; overflow-y: auto; background: #f7faff;">
+        <p style="color:#555;">Welcome to chat!</p>
+    </div>
+    <div style="padding: 12px 16px; background: #f7faff; border-top: 1px solid #e0e0e0;">
+        <input id="chat-input" type="text" style="
+            width: 75%;
+            padding: 8px 10px;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        " placeholder="Type a message...">
+        <button id="chat-send-btn" style="
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-left: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        ">Send</button>
+    </div>
+</div>
 
-		<!-- Bootstrap 5.3.0 CDN -->
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-		/>
-
-		<!-- Font Awesome CDN (for icons) -->
-		<link
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-			rel="stylesheet"
-		/>
-
-		<!-- Custom CSS -->
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	</head>
-
-	<body>
-		<!-- Navbar -->
-		<nav class="navbar navbar-expand-lg navbar-dark">
-			<div class="container">
-				<!-- Logo aligned to the left -->
-				<a
-					class="navbar-brand"
-					href="#"
-					>Skin Cancer Detection</a
-				>
-				<!-- Navbar toggler for mobile view -->
-				<button
-					class="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarNav"
-					aria-controls="navbarNav"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<!-- Links aligned to the right -->
-				<div
-					class="collapse navbar-collapse"
-					id="navbarNav"
-				>
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a
-								class="nav-link"
-								href="/"
-								>Home</a
-							>
-						</li>
-						<li class="nav-item">
-							<a
-								class="nav-link"
-								href="/about"
-								>About</a
-							>
-						</li>
-						<li class="nav-item">
-							<a
-								class="nav-link"
-								href="/blog"
-								>Blog</a
-							>
-						</li>
-						<li class="nav-item">
-							<a
-								class="nav-link"
-								href="/contact"
-								>Contact</a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-        <div>
-			{% block content %}
-			{% endblock %}
+	<!-- Footer Section -->
+	<footer class="footer">
+		<p>&copy; 2024 Skin Cancer Detection. All Rights Reserved.</p>
+		<div>
+			<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
 		</div>
+	</footer>
+	<!-- Bootstrap JS & Popper.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	<script>
+		// ...existing chatbot code...
 
-		<!-- Footer Section -->
-		<footer class="footer">
-			<p>&copy; 2024 Skin Cancer Detection. All Rights Reserved.</p>
-			<div>
-				<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-			</div>
-		</footer>
+		// Disable analyze button if not logged in
+		document.addEventListener('DOMContentLoaded', function () {
+			{% if not session.get('userid') %}
+			var analyzeBtn = document.getElementById('btn1');
+			if (analyzeBtn) {
+				analyzeBtn.disabled = true;
+				analyzeBtn.title = "You must be logged in to analyze images.";
+				analyzeBtn.classList.add('disabled');
+			}
+			{% endif %}
+			document.getElementById('chat-toggle-btn').onclick = function() {
+    document.getElementById('chat-window').style.display = 'block';
+    this.style.display = 'none';
+};
+document.getElementById('chat-close-btn').onclick = function() {
+    document.getElementById('chat-window').style.display = 'none';
+    document.getElementById('chat-toggle-btn').style.display = 'flex';
+};
 
-		<!-- Bootstrap JS & Popper.js -->
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-		<script>
-			// Get the chatbot button and modal
-			const chatbotBtn = document.getElementById('chatbot-btn')
-			const chatbotModal = document.getElementById('chatbot-modal')
-			const closeBtn = document.getElementById('close-chat')
+        // --- Chatbot JS ---
+        var chatInput = document.getElementById('chat-input');
+        var chatSendBtn = document.getElementById('chat-send-btn');
+        var chatMessages = document.getElementById('chat-messages');
+        var chatWindow = document.getElementById('chat-window');
+        var chatToggleBtn = document.getElementById('chat-toggle-btn');
+        var chatCloseBtn = document.getElementById('chat-close-btn');
 
-			// constions
+        // Restore chat window state from localStorage
+        if (localStorage.getItem('chatbot_open') === '1') {
+            chatWindow.style.display = 'block';
+            chatToggleBtn.style.display = 'none';
+        } else {
+            chatWindow.style.display = 'none';
+            chatToggleBtn.style.display = 'flex';
+        }
 
-			// Show the chatbot modal when button is clicked
-			chatbotBtn.addEventListener('click', function () {
-				chatbotModal.style.display = 'block'
-			})
+        // Restore chat history from localStorage
+        var chatHistory = localStorage.getItem('chatbot_history');
+        if (chatHistory && chatMessages) {
+            chatMessages.innerHTML = '';
+            try {
+                var msgs = JSON.parse(chatHistory);
+                msgs.forEach(function(m) {
+                    appendMessage(m.text, m.sender);
+                });
+            } catch (e) {
+                // ignore parse errors
+            }
+        }
 
-			// Close the chatbot modal when the close button is clicked
-			closeBtn.addEventListener('click', function () {
-				chatbotModal.style.display = 'none'
-			})
-		</script>
-	</body>
+        function appendMessage(text, sender) {
+            var msg = document.createElement('div');
+            msg.style.margin = '8px 0';
+            msg.style.textAlign = sender === 'user' ? 'right' : 'left';
+            msg.innerHTML = '<span style="display:inline-block; background:' +
+                (sender === 'user' ? '#4f8cff;color:#fff;' : '#e3f0ff;color:#222;') +
+                'padding:7px 13px;border-radius:12px;max-width:80%;word-break:break-word;">' +
+                text + '</span>';
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Save to localStorage
+            var history = localStorage.getItem('chatbot_history');
+            var arr = [];
+            if (history) {
+                try { arr = JSON.parse(history); } catch(e) {}
+            }
+            arr.push({text: text, sender: sender});
+            // Limit history to last 50 messages
+            if (arr.length > 50) arr = arr.slice(arr.length - 50);
+            localStorage.setItem('chatbot_history', JSON.stringify(arr));
+        }
+
+        function sendMessage() {
+            var text = chatInput.value.trim();
+            if (!text) return;
+            {% if not session.get('userid') %}
+            appendMessage('You must be <a href="{{ url_for("auth.login") }}" style="color:#1976d2;text-decoration:underline;" target="_blank">logged in</a> to use the chatbot.', 'bot');
+            chatInput.value = '';
+            return;
+            {% endif %}
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            chatInput.disabled = true;
+            chatSendBtn.disabled = true;
+            fetch('/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: text})
+            })
+            .then(response => response.json())
+            .then(data => {
+                appendMessage(data.response || "Sorry, no response.", 'bot');
+            })
+            .catch(() => {
+                appendMessage("Sorry, there was an error contacting the chatbot.", 'bot');
+            })
+            .finally(() => {
+                chatInput.disabled = false;
+                chatSendBtn.disabled = false;
+                chatInput.focus();
+            });
+        }
+
+        chatSendBtn.onclick = sendMessage;
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        chatToggleBtn.onclick = function() {
+            chatWindow.style.display = 'block';
+            chatToggleBtn.style.display = 'none';
+            localStorage.setItem('chatbot_open', '1');
+        };
+        chatCloseBtn.onclick = function() {
+            chatWindow.style.display = 'none';
+            chatToggleBtn.style.display = 'flex';
+            localStorage.setItem('chatbot_open', '0');
+        };
+        // --- End Chatbot JS ---
+		});
+
+		document.getElementById('chat-toggle-btn').onclick = function() {
+			document.getElementById('chat-window').style.display = 'block';
+			this.style.display = 'none';
+		};
+		document.getElementById('chat-close-btn').onclick = function() {
+			document.getElementById('chat-window').style.display = 'none';
+			document.getElementById('chat-toggle-btn').style.display = 'block';
+		};
+	</script>
+</body>
 </html>

@@ -1,212 +1,228 @@
 {% extends "base.html" %} {% block title %}Home{%endblock%}
 {%block content%}
-	<section
-		id="hero-section"
-		class="carousel slide"
-		data-bs-ride="carousel"
-	>
-		<div class="carousel-inner">
-			<!-- Slide 1 -->
-			<div
-				class="carousel-item active"
-				style="
+
+	<section id="hero-section" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-inner">
+	<!-- Slide 1 -->
+	<div class="carousel-item active" style="
 					background: url('https://cdn.pixabay.com/photo/2024/03/09/17/27/ai-generated-8623019_1280.jpg')
-						no-repeat;
+						no-repeat center 30%; /* Adjusted vertical position to 30% */
 					background-size: cover;
 					height: 100vh;
-					transition: background 0.5s ease;
-				"
-			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center ;"
-				>
-					<h1
-						class="text-white"
-						style="font-size: 6rem; font-weight: 900"
-					>
-						Detect Skin Cancer Early
-					</h1>
-				</div>
-			</div>
-			<!-- Slide 2 -->
-			<div
-				class="carousel-item"
-				style="
-					background: url('file:///C:/Users/HP/Downloads/istockphoto-1209448771-612x612.jpg')
-						no-repeat center center;
+				">
+	  <div class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center">
+		<h1 class="text-white" style="font-size: 4rem; padding-bottom: 450px"> Detect Skin Cancer Early </h1>
+	  </div>
+	</div>
+	<!-- Slide 2 -->
+	<div class="carousel-item" style=" background: url('https://github.com/zbari023/Deep_learning_Skincancerlib/blob/853975b6dd629f7cca431da62fa4a50dcacc2c22/static/assets/img/Medical-Derm-SKIN-CANCER-SCREENING.jpg?raw=true')
+	  no-repeat center 30%; /* Adjusted vertical position to 30% */
 					background-size: cover;
 					height: 100vh;
-				"
-			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
-				>
-					<h1
-						class="text-white"
-						style="font-size: 4rem"
-					>
-						Accurate AI-powered Detection
-					</h1>
-				</div>
-			</div>
-			<!-- Slide 3 -->
-			<div
-				class="carousel-item"
-				style="
-					background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp')
-						no-repeat center center;
-					background-size: cover;
-					height: 100vh;
-				"
-			>
-				<div
-					class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center"
-				>
-					<h1
-						class="text-white"
-						style="font-size: 4rem"
-					></h1>
-				</div>
-			</div>
-		</div>
-		<!-- Controls -->
-		<button
-			class="carousel-control-prev"
-			type="button"
-			data-bs-target="#hero-section"
-			data-bs-slide="prev"
-		>
-			<span
-				class="carousel-control-prev-icon"
-				aria-hidden="true"
-			></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button
-			class="carousel-control-next"
-			type="button"
-			data-bs-target="#hero-section"
-			data-bs-slide="next"
-		>
-			<span
-				class="carousel-control-next-icon"
-				aria-hidden="true"
-			></span>
-			<span class="visually-hidden">Next</span>
-		</button>
+				">
+	  <div class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center">
+		<h1 class="text-white" style="font-size: 4rem; padding-bottom: 450px"> Accurate AI-powered Detection</h1>
+	  </div>
+	</div>
+	<!-- Slide 3 -->
+	<div class="carousel-item" style=" background: url('https://raw.githubusercontent.com/nubaronat/SkinCancerDetection/refs/heads/main/SkinCancerDetection/static/images/img3.png.webp') no-repeat center 30%; background-size: cover; height: 100vh;">
+	<div class="carousel-caption d-flex justify-content-center align-items-center h-100 text-center">
+	  <h1 class="text-white" style="font-size: 4rem; padding-bottom: 450px"></h1>
+	</div>
+	</div>
+	</div>
+
+	<!-- Controls -->
+	<button class="carousel-control-prev" type="button" data-bs-target="#hero-section" data-bs-slide="prev">
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#hero-section" data-bs-slide="next">
+	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Next</span>
+	</button>
 	</section>
 	<!-- title -->
 	<div class="container">
-		<h2 class="text-center my-5">How it Works</h2>
+	<h2 class="text-center my-5">How it Works</h2>
 	</div>
 	<!-- Services Section -->
 	<section class="services-box">
-		<!-- title -->
-		<!-- services -->
-		<div class="service-item">
-			<i class="fas fa-upload"></i>
-			<h3>Upload Image</h3>
-			<p>Upload a high-quality image of your skin area for analysis.</p>
-		</div>
-		<div class="service-item">
-			<i class="fas fa-search"></i>
-			<h3>Analyze</h3>
-			<p>Our AI system will analyze the image for signs of skin cancer.</p>
-		</div>
-		<div class="service-item">
-			<i class="fas fa-check-circle"></i>
-			<h3>Get Results</h3>
-			<p>Receive an instant result on the likelihood of skin cancer.</p>
-		</div>
+	<!-- title -->
+	<!-- services -->
+	<div class="service-item">
+	<i class="fas fa-upload"></i>
+	<h3>Upload Image</h3>
+	<p>Upload a high-quality image of your skin area for analysis.</p>
+	</div>
+	<div class="service-item">
+	<i class="fas fa-search"></i>
+	<h3>Analyze</h3>
+	<p>Our AI system will analyze the image for signs of skin cancer.</p>
+	</div>
+	<div class="service-item">
+	<i class="fas fa-check-circle"></i>
+	<h3>Get Results</h3>
+	<p>Receive an instant result on the likelihood of skin cancer.</p>
+	</div>
 	</section>
-	<!-- How to Use Section -->
-	<section class="how-to-use-section">
-		<div class="container">
-			<h2>How to Use</h2>
-			<div class="how-to-use-icons">
-				<div class="how-to-use-icon-box">
-					<i class="fas fa-cloud-upload-alt"></i>
-					<h4>Upload Image</h4>
-					<p>
-						Click "Detect" and upload a clear image of the skin area you're
-						concerned about.
-					</p>
-				</div>
-				<div class="how-to-use-icon-box">
-					<i class="fas fa-cogs"></i>
-					<h4>Analyze</h4>
-					<p>
-						Our system processes the image to check for any signs of skin
-						cancer.
-					</p>
-				</div>
-				<div class="how-to-use-icon-box">
-					<i class="fas fa-heartbeat"></i>
-					<h4>Get Results</h4>
-					<p>
-						Get an instant result with the likelihood of skin cancer, helping
-						you take the next steps.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Features Section -->
-	<section class="features-section py-5">
-		<div class="container">
-			<h2 class="text-center mb-5">Why Choose Us?</h2>
+	<div class="container py-5">
+	<div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+	  <div class="carousel-inner">
+		  <div class="carousel-item active">
+			  <div class="row">
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+							  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUSEhMWFRUXFxgYGBgVFRgVFhcXFRUXGBgaGhgaHSggGBslHhYVITEhJykrLi4uGB8zODMtNygvLysBCgoKDg0OGxAQGzgmHyUvLSsrLy03Ly8tKy0yMi0tLS0tLi8vLS0tLS4tLy0tLS8tLS0tLS0tLS0tLS0uLS0tLf/AABEIAMkA+wMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAwYCBAUHAf/EAEgQAAIBAgQCBQYLBQcDBQAAAAECAwARBBIhMQVBBhMiUXEUMlNhgZEHI0JSkpOhscHR0hZicrLhFSQzQ4Ki8GNzwhc0g+Lx/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAEDBAIFBv/EADARAAIBAgMGBQQBBQAAAAAAAAABAgMRBBRRBRIhMUGhFSJhsdETcYHwkSMyUsHx/9oADAMBAAIRAxEAPwD3GlKUApSlAKUpQCleW9FvhJxOJmw6MmFcTyyRmKF38pgWMt8ZIpuMllvy0IrsSdOJRxQYTqk8l64YYzXOfygwdaF3tbZe+9AXqlUJOmOJl4nJgovJI0hkRGTEPIuJlQgMzwqBlNgTYa30Ol6+8a6dyQ8STCrGjYYSYeGeU5s6TYpZGjAt2ctlS5O2agL5Sq3wjpDJLxHG4NlUJhlgKsL5m66PM2bW2h2tWx0y6RDAYYzdWZXLLHFGDYvLIbKtzsOd/VQHcpVA490i4pgMDiMXio8ESnVdWkTTGxklVGEha17BhqvO/thPTfEph1mZ8BOWxcEH90lklRVlJDZibWcaECgPRaVXukXHnw+JwMKqpXEyvG5a91CxlgVsd9OdbXSzj6YDCS4uQFljA7I3ZmYKq+q7MNeW9AdelVvo9ieJFjJj0wkUJjLBYmlaZG0NpCwyEBc1yOYFcboR06lxjzJPEkR6gYnDgE5pIGeRLsCdwVTbTtUBfaV5f0V+EjEzvhOvTCmPErKxEDuZsOsIYlpUa4ynKNbjf1a9rov0g4jj+rxUcOGiwLsbCVpDimjViucBRkUm2x9+1wLtSvJ8R8KeIjgwU5w8bCd8X1wXNdYsJIoZku2pyZ2N/m118b8I/V+XMsazLC2ETDdWbGdsZEHS7HQDW9xyoD0GlUfCdKMbBi4sJxGLDg4hJXhkwzOVzQrneNxIL3t8oabd+nC4Z8KM8nD5Z2gjGKEkKRRAtkdZ1Doxub+asx/0UB6rSvP+LdOcQuAwM8EUcmJxa5+rYsECpA80pFjc2ygAX51ceAcTXFYaHErtLGj27sygkew3HsoDfpSlAKUpQClKUApSlAKUpQClKUB5fwX4NsTGcKks2HEeFxBxCtDE4xEhLs2RpCbBO1YgDYV9k+CxmgL9fbHnFeVdbml6gSdbm/wc1r5dL2v67V6fSgKJ0j6I4vHYiMzSYVYIpklR0hfytQjZurEhawB77dxtXP4l8F5xEeMeSc+VTzmaN1eVYowCvVqYwcrlQpGYi+um1el0oCh/szxKLG4jGYefCg4hIFcSxSPYwxBSVysuhOY+Fq3uO9AcNNBJHCPJ5XdJRKl2KyxMzI1mOouzaaecat1KAofHOjPEsdgZ8Ji58Ld+q6t4opF/w5VdjICxuSFGgsKi4l0Px0+H6pnwMbrPBNGYIHjS8JYnrBmOa/Yta2xr0GlAUXi3RziWI8mlefCDEYaZ5FIilERVowgBXPcm+c3uOVdbinR6THcPfB450Mkg1eBWVQVfNGVViTpZbi+uvfVkpQFIfgvFpMLPhZ8VhWDwNEkiRSJKWbKpeTtFfMz6KNyKgwXwcrhsRhpsLIVEcEkEyyPJJ1iMgC5MxIQBhmyiwq/UoDzngPwbHC+QsrxB4EnixJVSvlMU5NgSNSVuCL10OinRvH4DJhkxMEuCRmK9ZG/lKxsxbIGVspsTuR7ALAXalAee8F+D14W4eZJY3XCNji65TaRcaCABfuvrfetPA/BSUhxkHlFhLLDJhnCkvB5OW6oNc9uylV8Byr06lAUZOieMnxCYrHzwtJBFLHh0gjdI1eZCjSOWYkki2g000rT4b8GnVyYaRpgepwnUsgU5XmVJUSX2LM491ei0oDzrAfBuScIuKmzxYXCtCqxPLExld+0+dSCFKALlvyqx9BOj74DC+StIHVJJDERe4idiyq192BLVYqUApSlAKUpQClKUApSlAKUpQClKUApSlAK+Mba19rmdJJsuFlsbFlyKf35T1af7mFAb8EmZVbbMAdd9RepK+KLaCvtAKUpQClKUArWxOJyvEg+WxB9SqjMT7wo/1Vs1xpWzcQQX0jw0hI9c0sYU+6GQe00B2aUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUAqv9LWzHCQelxcRPqXD5sST4XhUe2rBVZ4rLm4pg4/mRYiU+0JGPvNQyUWalRzTBRc1oNxM8k+3+lcyqRjzOo05S5I6dK5J4q3ox9L+lYni7+jH0v6VXmIFmWqaex2KVxDxl/Rr9I/lWB46/ox9I/lUPFU9ezOlhar6d0d6q7wKTrMdj3+Y0GHB9UcPXfzYhqyPSB/Rj6R/Kq/0T42R5VKIwetxcred8zLD3f9KozVLnf3JylXlb2PQKVWn6Tkbxj6R/KsV6UMf8oAfxm/3VznqOvZnWQr6d0WelVn9qG9EPpf0p+1DeiH0v6Uz1HXsxkK+ndFmpVZ/ahvRD6X9KftQ3oh9L+lM9R17MZCvp3RZqVWf2ob0Q+l/SurwriDS3zIFsAbXude/TSu6eKp1HuxZXUwtWmt6S9jo1BjsUIo3lIJCKzkDchQSQL89KznlCi58ABuTyAqJcKGDdaA2cEMp1UKd0sdx39/uA0Gc0P2kgylsxzBQxSxzC6O4HdeyNz5VNjOOQx3DMcwzWAU9ooBmCm1ja4B1sCQDrUw4VBr8THra/xa62FhfTWw0rN8BESWMaEnclRc3Fjc2100oDPCTiRFcXAYX13qasUQKAAAANgBYCsqAUpSgFKUoBSlKAUpWLsALnSgMqpHlAbjUrDXqcGkfqDSy5/fZasuJxZbRdB9pql9FlzY3iU3fNHF9TEB/5VnqVdDRTpf5Fqkck3JvUTNWVr19yVlbbNasiImsCan6usTGK5cWdqSNZjUTNW06CteQiqpJlsXc1Z5QoLHYAk+A1qvdEmPkcOnaZTI3cDKxc/wA1d+Z60XfKLAAAbACwA8Kom3u2NNOm3JMzyczqaxZq5GO4oUrWgTEzAOBkjOzOyoDc20zEX9lVxpNl0pRjzZ2pMUo3NQ/2gvfUCcBUi7zFjdQRGL+ftqxUHfleuZxPgcqXaAmUC98oJYW3DJuPHUeuu1SRz9eKO8mKBqQS1QsLxOS9rG9XzhOG6lFmxNxcgBdyt9mYe7wGp2Nusvd2RDxELHUwGF1BffkO71mu3wpgjOSdLD1k66C3Mm9cqWYLpa7E6fOJ7hW3wWILKZJHJbLYIDdRc7hALs+4zdxIrdh4xhJRR52Lk3Bt9TvQREnO/nchvlHd4nmfZyrBeJRGRos4DoVBBuurAFQCRZjZhoCdxXzE4tlRnyEKqliW3sovoo3OmxIqsY/F4MyM8sM2clpGAsbnDAKScr5d4gACd1vpvXonklqPEIrX62O2ny1+Ve3PnY+6vvl8Wnxqa5bdtdcwuvPmNu+qiZsHETfDuLiTNdkz3RFjIAD3KlZMtgbLkGgAvUnlWCRpG6mS6s4kYAGzRoAdQ12vnCgC4vfbegLdh51dVdGDKwBVlNwQRcEEbipK1OElTDHkDBMi5Q3nBQNAfZW3QClKUApXn2G4/j4iI3RpZZJZ8qSRsOxHIoRUKxoFUq47ZLhdCTyqZ+L8SDLaByEVzlMZ+MJQ2LMLDQ3HVgBjkGvaFAXulUqfjvE+rLphUJFrKUlBYDCmYkXIIzSARAEXBOt7ayYbjHEOtUPhzlMkcbWjYrlEuJR5E+aCqQuc76K2mY2BAtZc58v7oPvJH4Vy8XjLswKsQpI30+6uginrmNyQUXTTSzNtpz9dVPGcSczSLGmYByCb2F7mqqvI04aKcnc6UvEEUZmBAva5Yb+6ubwbBphzN57GaVpmuRo0lgQLDbsi1c7jWJvEoIIOfzdzoG1tyrZk4mySDrIsoIFje5GprLwZu3I6Hc8sXbI3v/pXw4xfmn3/ANK5n9onriltQt738OXtrTxeMbrQlszFbix8dLfjUN25EqlF8zujHoSRY3FrjMNL7cvUaHEKTYgjme0NF7yLbb1WOGYoo0nxeZmNyM1iDdvfzHsqTB4thJITHfMRcFrZbNca21OgqeSucSgrcjvrKMoJVhcDnz58q+yoml79rQdob2J7u4H3VycTxfK2QLmI5E2G+m/499q5eP4757Sh4OqKlTkzrmKspuFucvasb230POoaizuMbcEWbySMkjtafvD8qgOBiJtZ/pD8qrHR/pEZzK6RSXOpzFMqAAhBfS66EkXOpa1dfC8WZk7EZkt8okBzrzCjTutblXLpQfQ73pLqz7xDhuFj1kVibiylgQx5A6DT21ouS7X0z5u7JcAbDloAot41H0hlYyRnq2+SSb6C5IK9wI7/ABqOaZljLOvygq6h3Iut+0LWBKtfS1xtyrHWXGy5FsH1b4m1HIthqbJn83Xs8vW7eF+fjWIk1uR2yFK5RYXAOpbntsNvbWGGzPmUrlzKoW6Ah1scyk21Oh9+1aWIxDMyqiBmYbDQC2ts2vMsap3XexbvLmWCDAxa4gr8YL5idFuBfORbzud9r61pca4zCoz9YhQhM4a4fq2JDA66DW5NrWFjuDUmCxGZGikVi5ucp7e4uAOWn4VHguFYdcOrTQxyPmOVSoaxve3r11J5mvQp/wBtuvUx1JxhxZ2I8Ec/WNI1ypBVSMmpBBBAzXFraNY3Oh0rt8AQAvYAaDYW765UURK3IyMdSENh7RsT7K6XBS4LaBhYbdlufI6E+0VbRVppGCrJyu2d2vlq0sVxRI1DPmHaVbFTcF2C37sovcsLgAE1qR9JsOwFnNyCSMpzKArNdhvsuwue0umtbzKdi1LVzhx3Dn/MHLWzWsSRmva2W4IzbXFr18m49AlszkXvuji2VOsJa69kZRe5sKA6YFKiw2IWRVdDdWFwe8GpaAUpSgFqUrWi4hC0jRLLG0iasgdS6g/OUG43G/fQGzSlRrMpYoGBZQCVuLgNfKSOQOVreBoCNtZNDbsi/rFzb8ffVK4hw5etleObLd2uM5y3ub89Nb+FXMH44/8AbX+Zqq+N4VEZH7PyjsT3+NZ8QlZXLqMnF8DjYia8AFlB6yxy217J1Pvrd6UwAqNSCNiORF/eLE1tDARmykXF829tduVqkx8auVDC4zDmRvpy8az2ju2sbknZyRyPJCMQ2UhSYxYtu503PK9jb7qLG4xICx65PnrrvzvXenwaSWzLe224PvFYwYWKI3Ase83P/wCVG6lxvY4WInytc4fDYLyYoMMrll6vPbzlLnT6Q19dScPXt4kSDzvNRuydANAeVyB7gbV18RFGWVil23B1W+W3v3FvHuvaaTCxyWYrc8jqDfuPr9RrlQg+pEq09DgcPizSzWcJnC+cASQVBy3NvnX5b1keBxtHPnk67NGyHYFdNCLc9N/VXbbAxyXLLc5m1BI0zEDbcWtU0eERVKBbA773Pt3qyMI2VyuVWV3Zlc6OdHVihAzlo2uzlz2za4AJAAy6Gpsbw3IoeGZRlNwCAQQdxof+Wrvph1CZAOzqLa7GtccJhvfL9pt99Ppx4h16jad+RXeM4MmKCQ6kyKzk6AAC/ZHdpe1aeMwyyAHPtISCQAbAktYjS17e69XiWFWXKwBXu5f0rnNwZB5oFtd7kjNa9j7BVNTD34xL6WKs/PxKpjcXkBEcgUpcJa2lxrpfLyOttL251r4RZJMQwljW5GSykea1gC2bc21O4vcVaYOi0QN8gN+8k7G+x03rsR8GhsAVvYWB2NvHc1FPDPkzqpjFzjzGEfDqrRRFc4Q30Oci2pJIuar0UbIqz2zAEgjuHf8AaatsXD41UqEFjvfW/vrQfBKoypdR83zgb+pr6eFq2T3YR0RgTcndkSSBgGU3B2ro8D3bwH41zsJh8gKhAedlNj7FY2/3Vt8FkVZHBOW4Fg3Z1udr7+yvNw+OhPEqnFcOPEtlHyO52cThkkUrIqupuCGAIIIKkEHvBI9tQPwuE3vEmpudB52va/i1Ou9bla+IxsaMquwUte1/UQDrsNWUa8yK9wyEf9lQafFJpa3ZGliWHsuzHxNYDg0FyTGpuFXUXsqBwqj1DrJPpt31NJj4lBYyLYDN5wOmXNcAb9kE+FZTYyNL5nUZRci4uOyW232BPsoCWNAoAGgAsKyrCGUOoZTcHUGs6AUpSgFVLiHQ55ZJW8pyB3eSPJHZ0eSKONsz5+2hVPNAW+Y66C1tpQFMn6CF4ypxUgY27Qzi1sKYFABkJsrnrRruB3A1NB0OdJEcYpsqSrIFKkgKkuIcILvltlnCXINhGCLG1rbSgNNEtOx741vqTszbd3srjYv/ABH/AIj99d21pCTzUD3E/nXDxC3kYfvH76yYycYQ3pOyLaSuzWc2N6idrso53B9gIJPhpW68Vjbe9fEjC7ADwFqx0sRTqLyyNv1Wo2sSCsbAMrHSx302O4PqNl93rrId9SIt65rYmjBeaX+yiKZ8ADgAjLbLfcAEkG1wd7gr7fXaufGdgNmZbDe6nKDrc37IIPgamxGDOa4tuDfmpAsCO8gGw9/qqaBFXRdz7+78Bp6qphiqL828uBbay4EwFfaxdwN6+30vVz2hh7X3incloZClYq4tekkgGpqyeLowtvS58iFCT6GVKUq/eWpBmlTpWuhqdCK6hUg+TRy0zHG4jIo9Zt9l60JMRqMut6m4owJCNta/tufyrlNaMggk377V81tXEynXcE/KuFjbh6ScfU3ZYmDB8w05ezvrZ4HLneS40sBY+JrlS47Stnopi1aWVAbsFUkdwJNr+41Xsnji4fn2ZZWpyVGTf7xLB5IB5hKfwmw+ibr9lV7iuOws0kfWCQuuZEKFQ3xkiJoQ2ZCWTQ9k9hgeYNprHqxe9hfw/wCdwr7U8gpJGCC3ZZRGVLaMCuUIozMqm1yHQAi7agGwFhPicXg5GLOktgZcxJTIrARiUed87qe0Li9iDa5q3hANgPd306sWtYW225UBrcJkRoY2juEKgqG3API+utuvgFq+0ApSqRxfD8RikxGISQmNXlkjjAZyQMJGEWwJLK0qsMgS4LFqAu9KosGI4uzyra2QIDdY1W7QwO4iYgZ3VmlUMex2bHUGvs0HFiyvcXSM5QGjCEtGR2xuZb3/AOnfLbnQF5pVKnj4wYyUdQ+lgUh2XCkjNqQC0+VTY7XtbcSYWLiayqWIZesjViDGM0KS4kFmGyExmBjkW7HTsjUAWki8mutlBHtJ/KuDxQHrCUOoJuD413EW0zG5N0XTSwszbac/XVdx8mWVx+8a8Lbz/pR+5swSvN/YywyPfM9hbYA3rOd+7etfymsY8TrXyx6G427k7LIALjQesVnHiawmxmlauFgMpJDBR4X1oQo3jefA6anMN7VqpAzMbEC3PvqIRSA5QVPtt76xjxBQlSdb60Cg1fdZNJA17FxblYa3pLG6jUrbxN/datTEYu+g3J08a3MShSxLXHhQ6akrXM48SmW2lYQRZwSzEDlbeoWEe+UX9tvdtWWCkDOQTYW5eNDlxsm0SzzBLdwqOXH5iMuttTbXSpocIGYnMSBaw/P1VjNiOq+SLc7C1QQt29krsjONL6KCbdwqabEMFAKt6tDW3hZAVBHOvs8oAqStzV7bppR44Zdd65OMxI1HKtySRQczoNdQSNDVf6T8fVDkQKZSNyLiNfnEcz3L/S9lOlKpLdRsoU/NwRzeN8a6rsIc0h2G+W/M959VdP4HWJnxRYkkpHcne+Z6oM2JJJy31OpOrsT84/gNKv3wOoVmxIO+SO/q7T6eNfSbPw8aM0lz6s17Qio4Wf490epUpSvePkhSlKAUpSgFKVoDjWHz9X1yZ+sMWXML9YqdYVt3he14UBv0rHOO8e/u3qLDYtJL5GBysyH+JDZh7KAnpUGExkcqq8bBlYXB7wfUdeRqXOO8e/voCFr9Zpr2db6aXNvx5V5n0i6WxpiJY+rclXZSbra4NrjXavSklBmZQQSqLcA6i5Yi45XrwjpUQMdibi/x0mnLzj3V520qMKsEpanr7HpxnUlfQ7a9MFOgicn1WJqZOkBOpw89vUv51T/LpLWDFR3J2B/ttWAncnz3v/Efzrx8jQ0PoPoR0LfJ0kbnBMB/DUidN400WKQD94re/PnVUjllH+dl8Zb/AGAmpGxs/pVYeso32NrU5ChoRKhB8Giz/t0m/VyX8Vtb31HL0yic3aOQfwlftuaqbYonzsvsijv9woqRnd2HjGLfY34VGRo6ELDU10LWnS+BdRHKWHNilvcDUx6cxnz4pCPUV/OqtHh/Rzx+09W3vI/Gs2weK/fYeqTMPvqchR0Dw9N8ztt0vTkj29eW/wBhqePpfGo0jmudyQtj4a6VVXwk19Y3v3hD94FZqk6almT+J8v2E3PuqMhR0OnRg1YuOF6fwp/lSknc3T86+Yrp5C+8MtvFPzqnniT7NkkH76A/bYGnlkR86Bf9Lsn2UyFDT3KsnSve3H7lzPwgRWssMg9qW++oH6eI28cludit/vqpGWD0Tj/5P/rUTTp8mID1sxb7NB7xULZ9BdO7JWDpLoXXiPwgq0WSCJkbYM+UhR3gA6nuvpVPRlZj2ZJGNyxZwo9ZbQ28Sa02Yk6/kPcNq2FItbXKDrbznbkB/wA033OumnTjDhEspUIUl5UbHXaEQqo72W+l/wB9tfu8DXp3wadGpMKrzTGzShQEtqqqSQW/eObbl47aPQvov1eWfEqM41ji+TF6yOb+N7eO17R69XDULeeR4W0toKadGny6vU2wa+1ErVIK2Hin2lKUApSlAKqeM6BYeWSSRnkvJ1mbVbAS9aHsLaErIFv3Rr3VbKUBUJOgMTA5ppSSGDG0YzZ5hN2lC5WXMLZSLEEg3BN9rC9DIUxEeJzuXjLsBfKl3z3sq2A89h4W7qstKAo2O+DxCCY55M+RY1LFQIwJIXzrlXV1MOYX0uzA6HTdwvQHCxzrMuY5ZVlVGOZAUjlRFAOgVetJW1iMq66VbKUBrgfGn+AfzGvBeln/AL7E/wDef+Y17+0YvfW+2ndVfxfQfAyyNK8RLuxZiJZRcnU6BrCs+IpSqJJHobOxcMPNyn1XQ8Xj60fJHgyIPsYVm0pH+Jh1I71Vk+1TavXf/Tvh3oD9bL+un/p5w/lAfrZf11lylT0/fwet4xQ0fb5PIM+HO6SJ/CwYf7q+GPD8pJB4oD9xr14/B7w/0B+tl/XWB+D7AehP1sv66ZOp6Dxiho+3yeQMIRt1jfRQfjUDsDsAB7fvNexn4P8AA+hP1sv66wPQHBehP1sv6qjJ1PQnxmho+3yeQiK+zL77fzWp1ZXW4Hg6/ga9cPQHBehP1sn6q+HoFgvRH6yT9VMnU9B4zQ0fb5PJBM3N2t4k/jUirEd2cHvyA/8AlevVv2Dwfoj9ZJ+qvn7B4P0R+sk/VTJ1PQeM0NH2+Ty4YJD5s0f+vNH94t9tZHhEvyVDDvVlP416h+weD9EfrJP1UHQLBehP1kn6qnJz9CPGaGj/AIXyeWHhk3on916xfAuvnAJ/EwH2XufdXrP7C4P0bfWy/roOgGC9CfrZf1VGTn+/8HjNDR/wvk8fK62GvIWB1J7hua9G6HdETFaacfG7qp2j9Z/f+6rNw3odhIHEkcVnGxLO9r8wGYgH113lw9X0cLuu8jDjdqfVjuUuC66/Y04ojW3GlTLFUgSth45ii1IK+gUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAV8tX2lAY5a+ZKzpQEfV186qpaUBF1VfOqqalARdVTqqlpQEfV19yVnSgMctfbV9pQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQHGm4vMGYDCuQpIuG3F7KR2dQbE+oWPOkfF5jmzYZ1IUkasQzAXCghOYZdbb5h8nXsUoDhScYxADf3ZibEpo9tZSqqwC6EKCx12A2vUqcUnzZThybtbNdwoBewJul9rE+PqNuuKUBxv7Xnuf7sxFlsBnvmzShtSlvkR2vbzxcgVlBxaU5i0DDQFdH1OVbr5l9DmubDkFDG9delAcaXjE4zZcKzABje7i+U2AHxepO/tHO4G5j8TIpQIp1cDzCwK6FiWB7AtmAv8q3K5rer5QHCXiGK7OaOxIlzARMcuXEIqkMCQbRFyBuxW43tUb8SxeW4iJOlx1b6di4seeY7j5OxIvmFhpQHI8sn7RCk5XewyFcyLGGt2huXOUe062rocNld41aQWfZhYjUEi4B1ANrgHWxF6nr6KA+0pSgFKUoBSlKAUpSgFKUoD//Z" alt="Basal cell carcinoma (BCC)" width="20px">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p>Basal cell carcinoma (BCC) is a type of skin cancer that forms in the basal cells of your skin. Basal cells exist in the lower part of your epidermis, which is the outside layer of your skin. Basal cell carcinoma looks like a small, sometimes shiny bump or scaly flat patch on your skin that slowly grows over time.</p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+								  <img src="https://d2jx2rerrg6sh3.cloudfront.net/image-handler/picture/2021/4/shutterstock_241007965.jpg" alt="squamous cell carcinoma">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p>Squamous cell carcinoma of the skin is a type of cancer that starts as a growth of cells on the skin. It starts in cells called squamous cells. The squamous cells make up the middle and outer layers of the skin. Squamous cell carcinoma is a common type of skin cancer.</p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+								  <img src="https://www.brownstonederm.com/wp-content/uploads/2015/11/melanoma.png" alt="melanoma">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p>Melanoma is a kind of skin cancer that starts in the melanocytes. Melanocytes are cells that make the pigment that gives skin its color. The pigment is called melanin. Melanoma typically starts on skin that's often exposed to the sun. This includes the skin on the arms, back, face and legs</p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  
+		   <div class="carousel-item">
+			  <div class="row">
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+								  <img src="https://c8.alamy.com/comp/2S01HFB/keratosis-word-cloud-conceptual-design-isolated-on-white-background-2S01HFB.jpg" alt="benign keratosis like lesions">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p> benign keratosis-like lesions(Bkl) are common benign skin lesions. These lesions are frequently seen adjacent to each other or can arise from one another. They can sometimes be difficult to differentiate despite having distinct histopathological features.</p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+								  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZr-p21GHglv4jKMmXBbMefbslnAs2yd_9H1k995yuV1rf9VGxhSaoESxCyP4ueK85P6s&usqp=CAU" alt="Dermatofibroma">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p>Dermatofibroma, also known as fibrous histiocytoma, is a common, benign, cutaneous soft-tissue lesion characterized by firm subcutaneous nodules, typically measuring 1 cm or less in diameter. Dermatofibromas are commonly found on the extremities and are prevalent across all age groups.</p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-md-4">
+					  <div class="blog-card">
+						  <div class="blog-inner">
+							  <div class="blog-front">
+								  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVPSEHMd-CEtHncmTtFsUkvvrd2s3RY9lWbAhpReYvHT6F_AQq6qGeoNwAkcM9UUdcD_M&usqp=CAU" alt="vascular lesions">
+							  </div>
+							  <div class="blog-back text-center">
+								  <p> Vascular lesions are abnormal growths or malformations in the blood vessels, which can occur in various parts of the body. They can be congenital or acquired and may result from injury, infection, or other underlying medical conditions. </p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+
+			  
+			  </div>
+		  </div>
+
+		  <!-- new  -->
+		  <div class="carousel-item">
 			<div class="row">
-				<div class="col-md-4 text-center">
-					<i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
-					<h4>Reliable Results</h4>
-					<p>
-						Our advanced AI system ensures accurate and reliable skin cancer
-						detection.
-					</p>
+				<div class="col-md-6">
+					<div class="blog-card">
+						<div class="blog-inner">
+							<div class="blog-front">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtkC8vBsJwmW8ZQGQNCtvYGyI1V3cuxPbkuA&s" alt="Melanocytic nevus">
+							</div>
+							<div class="blog-back text-center">
+								<p>Melanocytic nevus is the medical term for a mole. Nevi can appear anywhere on the body. They are benign (non-cancerous) and typically do not require treatment. A very small percentage of melanocytic nevi may develop a melanoma﻿ within them. Of note, the majority of cutaneous melanomas arise within normally appearing skin.
+
+								  Benign nevi are usually a single color, ranging from skin-colored to dark brown. They are typically round or oval-shaped. In addition, benign moles are symmetric, that is, when a line is drawn within them.</p>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-4 text-center">
-					<i class="fas fa-user-md fa-3x text-success mb-3"></i>
-					<h4>Trusted by Doctors</h4>
-					<p>
-						Medical professionals trust our platform for its accuracy and
-						speed.
-					</p>
+				<div class="col-md-6">
+					<div class="blog-card">
+						<div class="blog-inner">
+							<div class="blog-front">
+								<img src="d:\dina project\dina gded\ac.PNG" alt="actinic keratosis">
+							</div>
+							<div class="blog-back text-center">
+								<p>Actinic keratosis (AK) is the most common precancer that forms on skin damaged by chronic exposure to ultraviolet (UV) rays from the sun and/or indoor tanning. Solar keratosis is another name for the condition.
+
+								  AKs result from long-term exposure to ultraviolet (UV) radiation. This means that if you already have an AK, you are likely to develop more actinic keratoses (plural) in the future. This puts you at a higher risk for skin cancer, since AKs can develop into squamous cell carcinoma (SCC), a common and sometimes invasive form of the disease.</p>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-4 text-center">
-					<i class="fas fa-globe fa-3x text-success mb-3"></i>
-					<h4>Global Reach</h4>
-					<p>
-						Our platform is accessible worldwide, providing peace of mind to
-						users globally.
-					</p>
-				</div>
+			
+
+			
 			</div>
 		</div>
-	</section>
-	<!-- Chatbot Button -->
-	<div
-		id="chatbot-btn"
-		class="chatbot-btn"
-	>
-		<i class="fas fa-comment"></i>
+
+	  </div>
+	  <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Next</span>
+	  </button>
+	</div>
 	</div>
 
-	<!-- Chatbot Modal -->
-	<div
-		id="chatbot-modal"
-		class="chatbot-modal"
-	>
-		<div class="chatbot-header">
-			<h4>Chat with us</h4>
-			<button
-				id="close-chat"
-				class="close-btn"
-			>
-				&times;
-			</button>
-		</div>
-		<div class="chatbot-body">
-			<p>Hi! How can I help you today?</p>
-		</div>
+	<!-- Features Section -->
+	<section class="features-section py-5">
+	<div class="container">
+	<h2 class="text-center mb-5">Why Choose Us?</h2>
+	<div class="row">
+	  <div class="col-md-4 text-center">
+		<i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+		<h4>Reliable Results</h4>
+		<p>Our advanced AI system ensures accurate and reliable skin cancer detection.</p>
+	  </div>
+	  <div class="col-md-4 text-center">
+		<i class="fas fa-user-md fa-3x text-success mb-3"></i>
+		<h4>Trusted by Doctors</h4>
+		<p>Medical professionals trust our platform for its accuracy and speed.</p>
+	  </div>
+	  <div class="col-md-4 text-center">
+		<i class="fas fa-globe fa-3x text-success mb-3"></i>
+		<h4>Global Reach</h4>
+		<p>Our platform is accessible worldwide, providing peace of mind to users globally.</p>
+	  </div>
 	</div>
+	</div>
+	</section>
 {% endblock %}

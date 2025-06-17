@@ -1,11 +1,21 @@
 {% extends "base.html" %} {% block title %}Home{%endblock%}
 {%block content%}
+    <!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
     <div class="container">
         <header>
             <h1>Skin Cancer Classification</h1>
             <p>Upload a skin lesion image for analysis</p>
         </header>
-    
+
         <main>
             <div class="upload-section">
                 <div class="upload-box" id="dropZone">
@@ -17,21 +27,26 @@
                     </div>
                 </div>
             </div>
-        
-            <div class="preview-section" style="display: none;">
-                <div class="image-preview">
-                    <img id="previewImage" src="" alt="Preview">
-                </div>
-                <div class="results" style="display: none;">
-                    <h2>Analysis Results</h2>
-                    <div class="result-content">
-                        <p>Classification: <span id="classification"></span></p>
-                        <p>Confidence: <span id="confidence"></span>%</p>
+
+            <form id="analyzeForm" enctype="multipart/form-data" onsubmit="return false;">
+                <div class="preview-section" style="display: none;">
+                    <div class="image-preview">
+                        <img id="previewImage" src="" alt="Preview">
                     </div>
+                    <div class="results" style="display: none;">
+                        <h2>Analysis Results</h2>
+                        <div class="result-content">
+                            <p>Classification: <span id="classification"></span></p>
+                            <p>Confidence: <span id="confidence"></span>%</p>
+                        </div>
+                    </div>
+                    <button type="button" class="analyze-btn">Analyze Image</button>
                 </div>
-                <button class="analyze-btn">Analyze Image</button>
-            </div>
-        
+            </form>
+            <div id="errorMsg" style="color:red;"></div>
+
+            
+
             <div class="loading" style="display: none;">
                 <div class="spinner"></div>
                 <p>Analyzing image...</p>
@@ -40,4 +55,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
 {%endblock%}

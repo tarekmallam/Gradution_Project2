@@ -1,0 +1,810 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<style>
+  .dashboard-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    color: #1a237e;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    font-size: 2.2rem;
+  }
+  .nav-tabs {
+    border-bottom: 2px solid #1976d2;
+    background: #f5f7fa;
+    border-radius: .5rem .5rem 0 0;
+    margin-bottom: 0;
+  }
+  .nav-tabs .nav-link.active {
+    background-color: #1976d2;
+    color: #fff !important;
+    font-weight: bold;
+    border: none;
+    border-radius: .5rem .5rem 0 0;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  }
+  .nav-tabs .nav-link {
+    color: #1976d2;
+    border: none;
+    border-radius: .5rem .5rem 0 0;
+    font-size: 1.1rem;
+    padding: .75rem 2rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-tabs .nav-link:hover {
+    background: #e3eafc;
+    color: #0d47a1;
+  }
+  .tab-content {
+    background: #fff;
+    border: 1px solid #e3eafc;
+    border-top: none;
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    border-radius: 0 0 .7rem .7rem;
+    box-shadow: 0 4px 24px rgba(25, 118, 210, 0.07);
+    min-height: 350px;
+  }
+  .table {
+    margin-bottom: 0;
+    background: #fff;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1rem;
+  }
+  .table th {
+    background: #e3eafc;
+    color: #1a237e;
+    font-weight: 700;
+    border-bottom: 2px solid #1976d2;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f5f7fa;
+  }
+  .badge.bg-primary.wrap-text {
+    background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+    border-radius: .5em;
+    white-space: pre-line;
+    word-break: break-word;
+    max-width: 220px;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  }
+  .badge.bg-info.text-dark {
+    background: linear-gradient(90deg, #bbdefb 60%, #90caf9 100%);
+    color: #0d47a1 !important;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+    border-radius: .5em;
+  }
+  .no-data {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 1.1rem;
+  }
+  .table-responsive {
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.04);
+  }
+  .users-title {
+    color: #1976d2;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-align: left;
+  }
+  @media (max-width: 768px) {
+    .tab-content {
+      padding: 1rem .2rem .5rem .2rem;
+    }
+    .dashboard-header {
+      font-size: 1.3rem;
+    }
+    .nav-tabs .nav-link {
+      padding: .5rem 1rem;
+      font-size: .95rem;
+    }
+    .badge.bg-primary.wrap-text, .badge.bg-info.text-dark {
+      font-size: .95rem;
+      padding: .4em .7em;
+      max-width: 120px;
+    }
+  }
+  .action-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 0 0.3rem;
+    color: #1976d2;
+    transition: color 0.2s;
+  }
+  .action-icon:hover {
+    color: #d32f2f;
+  }
+  .add-blog-section {
+    background: #f8f9fa;
+    border-radius: .7rem;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dashboard-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2.5rem 0 1.5rem 0;
+  }
+  .dashboard-link-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: #f5f7fa;
+    border-radius: .7rem;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+    padding: 1.2rem 2rem;
+    font-size: 1.15rem;
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dashboard-link-card:hover {
+    background: #e3eafc;
+    color: #0d47a1;
+    text-decoration: none;
+  }
+  .blog-table th, .blog-table td {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1rem;
+  }
+  .blog-table th {
+    background: #e3eafc;
+    color: #1a237e;
+    font-weight: 700;
+    border-bottom: 2px solid #1976d2;
+  }
+  .blog-table tbody tr:nth-of-type(odd) {
+    background-color: #f5f7fa;
+  }
+  .blog-action-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 0 0.3rem;
+    color: #1976d2;
+    transition: color 0.2s;
+  }
+  .blog-action-icon:hover {
+    color: #d32f2f;
+  }
+  @media (max-width: 1200px) {
+    .tab-content {
+      padding: 1.5rem .5rem .5rem .5rem;
+    }
+    .dashboard-header {
+      font-size: 1.7rem;
+    }
+    .nav-tabs .nav-link {
+      padding: .6rem 1.2rem;
+      font-size: 1rem;
+    }
+    .badge.bg-primary.wrap-text, .badge.bg-info.text-dark {
+      font-size: .98rem;
+      padding: .45em .8em;
+      max-width: 160px;
+    }
+    .add-blog-section {
+      padding: 1.2rem .7rem;
+    }
+  }
+  @media (max-width: 992px) {
+    .dashboard-links {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .dashboard-link-card {
+      width: 100%;
+      justify-content: center;
+    }
+    .tab-content {
+      padding: 1rem .2rem .5rem .2rem;
+    }
+    .dashboard-header {
+      font-size: 1.2rem;
+    }
+    .nav-tabs .nav-link {
+      padding: .5rem .7rem;
+      font-size: .92rem;
+    }
+    .badge.bg-primary.wrap-text, .badge.bg-info.text-dark {
+      font-size: .92rem;
+      padding: .35em .5em;
+      max-width: 100px;
+    }
+    .add-blog-section {
+      padding: 1rem .3rem;
+    }
+    .table-responsive {
+      font-size: .95rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .tab-content {
+      padding: .7rem .1rem .3rem .1rem;
+    }
+    .dashboard-header {
+      font-size: 1rem;
+    }
+    .nav-tabs .nav-link {
+      padding: .4rem .5rem;
+      font-size: .85rem;
+    }
+    .badge.bg-primary.wrap-text, .badge.bg-info.text-dark {
+      font-size: .85rem;
+      padding: .25em .3em;
+      max-width: 70px;
+    }
+    .add-blog-section {
+      padding: .7rem .1rem;
+    }
+    .table-responsive {
+      font-size: .9rem;
+    }
+    .table th, .table td, .blog-table th, .blog-table td {
+      font-size: .85rem;
+      padding: .3rem .2rem;
+    }
+    .users-title {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 576px) {
+    .dashboard-header {
+      font-size: .9rem;
+      padding: .5rem 0;
+    }
+    .nav-tabs .nav-link {
+      padding: .3rem .2rem;
+      font-size: .8rem;
+    }
+    .badge.bg-primary.wrap-text, .badge.bg-info.text-dark {
+      font-size: .8rem;
+      padding: .15em .2em;
+      max-width: 50px;
+    }
+    .add-blog-section {
+      padding: .5rem 0;
+    }
+    .table-responsive {
+      font-size: .85rem;
+    }
+    .table th, .table td, .blog-table th, .blog-table td {
+      font-size: .8rem;
+      padding: .2rem .1rem;
+    }
+    .users-title {
+      font-size: .9rem;
+    }
+    .dashboard-links {
+      gap: .5rem;
+    }
+  }
+</style>
+
+<h2 class="dashboard-header"><i class="bi bi-speedometer2"></i> Your Dashboard</h2>
+
+<ul class="nav nav-tabs justify-content-center" id="dashboardTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="classifications-tab" data-bs-toggle="tab" data-bs-target="#classifications" type="button" role="tab" aria-controls="classifications" aria-selected="true">
+      <i class="bi bi-images"></i> My Classifications
+    </button>
+  </li>
+  {% if is_admin %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="false">
+      <i class="bi bi-people"></i> Users
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="blog-tab" data-bs-toggle="tab" data-bs-target="#blog" type="button" role="tab" aria-controls="blog" aria-selected="false">
+      <i class="bi bi-journal-richtext"></i> Blog
+    </button>
+  </li>
+  {% endif %}
+</ul>
+<div class="tab-content mt-3" id="dashboardTabsContent">
+  <div class="tab-pane fade show active" id="classifications" role="tabpanel" aria-labelledby="classifications-tab">
+    {% set label_map = {
+      'M': 'Melanoma',
+      'V': 'Vascular lesion',
+      'B': 'Basal cell carcinoma',
+      'AK': 'Actinic keratosis',
+      'SCC': 'Squamous cell carcinoma',
+      'PBK': 'Pigmented benign keratosis',
+      'SK': 'Seborrheic keratosis',
+      'DF': 'Dermatofibroma',
+      'N': 'Nevus'
+    } %}
+    {% if dashboard_data.images %}
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle" id="imagesTable">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Image</th>
+              <th>Result</th>
+              <th>Confidence</th>
+              <th>Classification Date</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for img in dashboard_data.images %}
+              <tr id="image-row-{{ img.imageid }}">
+                <td>
+                  {% if img.username %}
+                    {{ img.username }}
+                  {% else %}
+                    <span class="no-data">N/A</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if img.image_path %}
+                    <img src="{{ img.image_path }}" alt="Image" style="max-width: 80px; max-height: 60px; border-radius: 6px;">
+                  {% else %}
+                    <span class="no-data">N/A</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if img.classification and img.classification.result %}
+                    {% set res = img.classification.result %}
+                    {% if res is sequence %}
+                      {% set val = res[0] %}
+                    {% else %}
+                      {% set val = res %}
+                    {% endif %}
+                    {% if val in label_map %}
+                      {{ label_map[val] }}
+                    {% else %}
+                      {{ val }}
+                    {% endif %}
+                  {% else %}
+                    <span class="no-data">N/A</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if img.classification and img.classification.confidence is defined %}
+                    <span class="badge bg-info text-dark">
+                      {{ "%.2f"|format(img.classification.confidence|float) }}
+                    </span>
+                  {% else %}
+                    <span class="badge bg-info text-dark">0.00</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if img.classification and img.classification.classificationdate %}
+                    {{ img.classification.classificationdate[:19].replace('T', ' ') }}
+                  {% else %}
+                    <span class="no-data">N/A</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <i class="bi bi-trash action-icon" title="Delete" onclick="confirmDelete('image', '{{ img.imageid }}')"></i>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="no-data">No images uploaded yet.</div>
+    {% endif %}
+  </div>
+  
+  {% if is_admin %}
+  <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+    <div class="users-title"><i class="bi bi-people"></i> Users</div>
+    {% if users %}
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle" id="usersTable">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Registration Date</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+              <tr id="user-row-{{ user.userid }}">
+                <td>{{ user.userid }}</td>
+                <td>
+                  <i class="bi bi-person-circle"></i>
+                  {{ user.username }}
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.registrationdate[:19].replace('T', ' ') if user.registrationdate }}</td>
+                <td>
+                  <i class="bi bi-pencil-square action-icon" title="Edit Password" onclick="editUserPassword('{{ user.userid }}', '{{ user.username }}')"></i>
+                </td>
+                <td>
+                  <i class="bi bi-trash action-icon" title="Delete" onclick="confirmDelete('user', '{{ user.userid }}')"></i>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="no-data">No users found.</div>
+    {% endif %}
+  </div>
+  <div class="tab-pane fade" id="blog" role="tabpanel" aria-labelledby="blog-tab">
+    <div class="users-title"><i class="bi bi-journal-richtext"></i> Blog</div>
+    <div class="add-blog-section mb-4" id="add-blog-section">
+      <h4 class="mb-3"><i class="bi bi-journal-plus"></i> Add Blog Post</h4>
+      <form method="POST" action="{{ url_for('auth.add_blog') }}" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="blog_title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="blog_title" name="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="blog_image" class="form-label">Main Image</label>
+          <input type="file" class="form-control" id="blog_image" name="image_file" accept="image/*" required>
+        </div>
+        <!-- Sectioned Content Inputs -->
+        <div class="mb-3">
+          <label for="blog_overview" class="form-label">Overview</label>
+          <textarea class="form-control" id="blog_overview" name="overview" rows="2" required></textarea>
+          <input type="file" class="form-control mt-2" name="overview_path" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="blog_symptoms" class="form-label">Symptoms</label>
+          <textarea class="form-control" id="blog_symptoms" name="symptoms" rows="2"></textarea>
+          <input type="file" class="form-control mt-2" name="symptoms_path" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="blog_causes" class="form-label">Causes</label>
+          <textarea class="form-control" id="blog_causes" name="causes" rows="2"></textarea>
+          <input type="file" class="form-control mt-2" name="causes_path" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="blog_prevention" class="form-label">Prevention</label>
+          <textarea class="form-control" id="blog_prevention" name="prevention" rows="2"></textarea>
+          <input type="file" class="form-control mt-2" name="prevention_path" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="blog_treatment" class="form-label">Treatment</label>
+          <textarea class="form-control" id="blog_treatment" name="treatment" rows="2"></textarea>
+          <input type="file" class="form-control mt-2" name="treatment_path" accept="image/*">
+        </div>
+        <div class="mb-3">
+          <label for="blog_doctor" class="form-label">When to See a Doctor</label>
+          <textarea class="form-control" id="blog_doctor" name="doctor" rows="2"></textarea>
+          <input type="file" class="form-control mt-2" name="doctor_path" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Blog</button>
+      </form>
+    </div>
+
+
+    <div class="mb-4">
+      <h5 class="mb-3"><i class="bi bi-table"></i> Blog Posts</h5>
+      <div class="table-responsive">
+        <table class="table blog-table table-striped table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Image</th>
+              <th>Overview</th>
+              <th>Symptoms</th>
+              <th>Causes</th>
+              <th>Prevention</th>
+              <th>Treatment</th>
+              <th>When to See a Doctor</th>
+              <th>Date</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for blog in blogs %}
+            <tr id="blog-row-{{ blog.blogid or blog.id }}">
+              <td>{{ blog.title }}</td>
+              <td>
+                {% if blog.image_url %}
+                  <img src="{{ blog.image_url }}" alt="Blog Image" style="max-width: 80px; max-height: 60px; border-radius: 6px;">
+                {% else %}
+                  N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if blog.overview_path %}
+                  <img src="{{ blog.overview_path }}" alt="Overview Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.overview }}
+              </td>
+              <td>
+                {% if blog.symptoms_path %}
+                  <img src="{{ blog.symptoms_path }}" alt="Symptoms Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.symptoms }}
+              </td>
+              <td>
+                {% if blog.causes_path %}
+                  <img src="{{ blog.causes_path }}" alt="Causes Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.causes }}
+              </td>
+              <td>
+                {% if blog.prevention_path %}
+                  <img src="{{ blog.prevention_path }}" alt="Prevention Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.prevention }}
+              </td>
+              <td>
+                {% if blog.treatment_path %}
+                  <img src="{{ blog.treatment_path }}" alt="Treatment Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.treatment }}
+              </td>
+              <td>
+                {% if blog.doctor_path %}
+                  <img src="{{ blog.doctor_path }}" alt="Doctor Image" style="max-width: 60px; max-height: 40px; border-radius: 4px;"><br>
+                {% endif %}
+                {{ blog.doctor }}
+              </td>
+              <td>
+                {% if blog.postdate %}
+                  {{ blog.postdate[:19].replace('T', ' ') }}
+                {% elif blog.created_at %}
+                  {{ blog.created_at[:19].replace('T', ' ') }}
+                {% else %}
+                  N/A
+                {% endif %}
+              </td>
+              <td>
+                <i class="bi bi-pencil-square blog-action-icon" title="Edit" onclick="editBlog('{{ blog.blogid or blog.id }}')"></i>
+              </td>
+              <td>
+                <i class="bi bi-trash blog-action-icon" title="Delete" onclick="deleteBlog('{{ blog.blogid or blog.id }}')"></i>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="11" class="no-data">No blog posts found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="{{ url_for('auth.blog') }}" class="btn btn-outline-primary" target="_blank">
+        <i class="bi bi-journal-richtext"></i> View Blog Page
+      </a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="deleteConfirmModalBody">
+        Are you sure you want to permanently delete this item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Password Modal -->
+<div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form id="editPasswordForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPasswordModalLabel">Edit User Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="editPasswordUser"></div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" required minlength="7">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="editUserId" name="userid">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Blog Edit Modal -->
+<div class="modal fade" id="editBlogModal" tabindex="-1" aria-labelledby="editBlogModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form id="editBlogForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBlogModalLabel">Edit Blog Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="editBlogTitle" class="form-label">Title</label>
+          <input type="text" class="form-control" id="editBlogTitle" name="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="editBlogContent" class="form-label">Content</label>
+          <textarea class="form-control" id="editBlogContent" name="content" rows="3" required></textarea>
+        </div>
+        <input type="hidden" id="editBlogId" name="blog_id">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Bootstrap Icons CDN (if not already included in base.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<!-- Bootstrap JS (for tabs and modals) if not already included in base.html -->
+<script>
+  let deleteType = '';
+  let deleteId = '';
+
+  function confirmDelete(type, id) {
+    deleteType = type;
+    deleteId = id;
+    let msg = (type === 'user')
+      ? 'Are you sure you want to permanently delete this user?'
+      : 'Are you sure you want to permanently delete this image/classification?';
+    document.getElementById('deleteConfirmModalBody').innerText = msg;
+    var modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    modal.show();
+  }
+
+  document.getElementById('deleteConfirmBtn').onclick = function() {
+    let url = '';
+    if (deleteType === 'user') {
+      url = `/delete_user/${deleteId}`;
+    } else if (deleteType === 'image') {
+      url = `/delete_image/${deleteId}`;
+    }
+    fetch(url, {method: 'POST'})
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          if (deleteType === 'user') {
+            const row = document.getElementById('user-row-' + deleteId);
+            if (row) row.remove();
+          } else if (deleteType === 'image') {
+            const row = document.getElementById('image-row-' + deleteId);
+            if (row) row.remove();
+          }
+        } else {
+          alert(data.message || 'Delete failed');
+        }
+      })
+      .catch(() => alert('Delete failed'))
+      .finally(() => {
+        bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+      });
+  };
+
+  function editUserPassword(userid, username) {
+    document.getElementById('editUserId').value = userid;
+    document.getElementById('editPasswordUser').innerHTML = '<b>User:</b> ' + username;
+    document.getElementById('newPassword').value = '';
+    var modal = new bootstrap.Modal(document.getElementById('editPasswordModal'));
+    modal.show();
+  }
+
+  document.getElementById('editPasswordForm').onsubmit = function(e) {
+    e.preventDefault();
+    const userid = document.getElementById('editUserId').value;
+    const newPassword = document.getElementById('newPassword').value;
+    fetch(`/edit_password/${userid}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password: newPassword})
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Password updated successfully');
+      } else {
+        alert(data.message || 'Password update failed');
+      }
+    })
+    .catch(() => alert('Password update failed'))
+    .finally(() => {
+      bootstrap.Modal.getInstance(document.getElementById('editPasswordModal')).hide();
+    });
+  };
+
+  function editBlog(blogId) {
+    // Find the row and get current values
+    const row = document.getElementById('blog-row-' + blogId);
+    const title = row.children[0].innerText;
+    const content = row.children[2].innerText;
+    document.getElementById('editBlogId').value = blogId;
+    document.getElementById('editBlogTitle').value = title;
+    document.getElementById('editBlogContent').value = content;
+    var modal = new bootstrap.Modal(document.getElementById('editBlogModal'));
+    modal.show();
+  }
+
+  document.getElementById('editBlogForm').onsubmit = function(e) {
+    e.preventDefault();
+    const blogId = document.getElementById('editBlogId').value;
+    const title = document.getElementById('editBlogTitle').value;
+    const content = document.getElementById('editBlogContent').value;
+    fetch(`/edit_blog/${blogId}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({title, content})
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // Update the table row
+        const row = document.getElementById('blog-row-' + blogId);
+        row.children[0].innerText = title;
+        row.children[2].innerText = content;
+        alert('Blog updated successfully');
+      } else {
+        alert(data.message || 'Update failed');
+      }
+    })
+    .catch(() => alert('Update failed'))
+    .finally(() => {
+      bootstrap.Modal.getInstance(document.getElementById('editBlogModal')).hide();
+    });
+  };
+
+  function deleteBlog(blogId) {
+    if (!confirm('Are you sure you want to delete this blog post?')) return;
+    fetch(`/delete_blog/${blogId}`, {method: 'POST'})
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const row = document.getElementById('blog-row-' + blogId);
+          if (row) row.remove();
+        } else {
+          alert(data.message || 'Delete failed');
+        }
+      })
+      .catch(() => alert('Delete failed'));
+  }
+</script>
+{% endblock %}
