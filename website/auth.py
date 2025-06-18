@@ -21,6 +21,7 @@ import traceback
 from ctransformers import AutoModelForCausalLM
 import logging
 import threading
+import mimetypes
 
 auth = Blueprint('auth', __name__)
 
@@ -67,7 +68,7 @@ else:
 
 
 # Load the Keras image classification model
-# image_model = tf.keras.models.load_model('model.h5')
+image_model = tf.keras.models.load_model('model.h5')
 
 # Class labels
 CLASSES = [
@@ -118,15 +119,40 @@ logging.basicConfig(level=logging.DEBUG)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.abspath(os.path.join(current_dir, '..'))
-model_path = os.path.join(project_root, "skin_cancer_model.gguf")
+# Ensure the model path is correct
+
+
+model_path = os.path.join(project_root, "ggml-model-q4_0.gguf")
+
+if not os.path.isfile(model_path):
+    raise FileNotFoundError(f"Model file not found at: {model_path}")
+else:
+    logging.info(f"**************************Model file found at: {model_path}")
 
 chatbot_model = None
 chatbot_lock = threading.Lock()  # Always create a lock, even if model fails to load
+
+def is_valid_gguf_file(filepath):
+    # GGUF files start with magic bytes: b'GGUF'
+    try:
+        with open(filepath, "rb") as f:
+            magic = f.read(4)
+            return magic == b'GGUF'
+    except Exception:
+        return False
 
 def load_chatbot_model():
     global chatbot_model
     try:
         if os.path.exists(model_path):
+            # Check if file is a valid GGUF binary
+            if not is_valid_gguf_file(model_path):
+                logging.error(f"File at {model_path} is not a valid GGUF model file. "
+                              "It may be an HTML error page or corrupted download. "
+                              "Please re-download the model from the correct source.")
+                with chatbot_lock:
+                    chatbot_model = None
+                return
             logging.info(f"Loading model from: {model_path}")
             temp_model = None
             try:
@@ -320,9 +346,6 @@ def signup():
             # ✅ Insert new user into the database
             new_user = {
                 "email": email,
-                "password": password,  # ⬅️ Storing password as plain text (⚠️ Not recommended for production)
-                "username": name,
-                "registrationdate": datetime.utcnow().isoformat()
             }
 
             insert_response = supabase.table('user').insert(new_user).execute()
@@ -889,3 +912,92 @@ def chat():
         logging.error(f"Error in chat endpoint: {str(e)}")
         logging.error(traceback.format_exc())
         return jsonify({'response': f"Server error: {str(e)}"}), 500
+
+# def load_chatbot_model():
+#     global chatbot_model
+#     try:
+#         if os.path.exists(model_path):
+#             # Check if file is a valid GGUF binary
+#             if not is_valid_gguf_file(model_path):
+#                 logging.error(f"File at {model_path} is not a valid GGUF model file. "
+#                               "It may be an HTML error page or corrupted download. "
+#                               "Please re-download the model from the correct source.")
+#                 with chatbot_lock:
+#                     chatbot_model = None
+#                 return
+#             logging.info(f"Loading model from: {model_path}")
+#             temp_model = None
+#             try:
+#                 temp_model = AutoModelForCausalLM.from_pretrained(
+#                     model_path,
+#                     model_type="llama",
+#                     context_length=256,
+#                     batch_size=1,
+#                     threads=1,
+#                     reset=True
+#                 )
+#             except Exception as model_e:
+#                 logging.error(f"Model loading failed: {model_e}")
+#                 logging.error(traceback.format_exc())
+#             with chatbot_lock:
+#                 chatbot_model = temp_model
+#             if temp_model is not None:
+#                 chatbot_model = temp_model
+#                 logging.info("Model loaded successfully ✅")
+#             else:
+#                 logging.error("Model failed to load, chatbot_model is None")
+#         else:
+#             logging.error(f"Model file not found at: {model_path}")
+#             with chatbot_lock:
+#                 chatbot_model = None
+#     except Exception as e:
+#         logging.error(f"Error loading model: {str(e)}")
+#         logging.error(traceback.format_exc())
+#         with chatbot_lock:
+#             chatbot_model = None
+
+# # Load the chatbot model at startup
+# load_chatbot_model()
+
+# def generate_response(question):
+#     print("---------------------------",chatbot_model)	
+#     try:
+#         with chatbot_lock:
+#             model = chatbot_model
+#         if chatbot_model is None:
+#             fallback_responses = {
+#                 "what is skin cancer": "Skin cancer is the abnormal growth of skin cells, most often developing on skin exposed to the sun. It's the most common form of cancer globally.",
+#                 "types of skin cancer": "The three main types of skin cancer are:\n1. Basal cell carcinoma (BCC) - Most common and least dangerous\n2. Squamous cell carcinoma (SCC) - Second most common, can spread if untreated\n3. Melanoma - Less common but most dangerous, can spread rapidly",
+#                 "symptoms of skin cancer": "Common symptoms include:\n- Changes in existing moles\n- New growths on the skin\n- Sores that don't heal\n- Unusual skin patches that are red, itchy, or scaly",
+#                 "how to prevent skin cancer": "Key prevention methods:\n- Use sunscreen (SPF 30+)\n- Avoid tanning beds\n- Wear protective clothing\n- Seek shade during peak sun hours\n- Get regular skin checks"
+#             }
+#             for key, response in fallback_responses.items():
+#                 if question.lower() in key or key in question.lower():
+#                     return response
+#             return "Sorry, the skin cancer model is not available. Please try asking about basic skin cancer information like types, symptoms, or prevention."
+#         prompt = f"Q:{question}\nA:"
+#         logging.info(f"Processing question: {question}")
+#         try:
+#             with chatbot_lock:
+#                 output = chatbot_model(
+#                     prompt,
+#                     max_new_tokens=50,
+#                     temperature=0.7,
+#                     top_k=20,
+#                     top_p=0.9,
+#                     repetition_penalty=1.1,
+#                     stop=["\n", "Q:", "Question:"]
+#                 )
+#         except Exception as e:
+#             logging.error(f"Error during chatbot_model inference: {str(e)}")
+#             logging.error(traceback.format_exc())
+#             return "Sorry, there was an error generating a response. Please try again later."
+#         logging.info(f"Raw model output: {output}")
+#         answer = output.strip()
+#         if not answer:
+#             return "I apologize, but I couldn't generate a response. Please try rephrasing your question."
+#         return answer
+#     except Exception as e:
+#         logging.error(f"Error generating response: {str(e)}")
+#         logging.error(traceback.format_exc())
+#         return f"Error processing request: {str(e)}"
